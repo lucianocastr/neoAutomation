@@ -1,0 +1,33 @@
+#pragma once
+
+// ── WiFi ────────────────────────────────────────────────────
+#define WIFI_SSID  "YOUR_WIFI_SSID"
+#define WIFI_PASS  "YOUR_WIFI_PASSWORD"
+
+// ── Balance API (para detección de contacto) ────────────────
+#define NEO_IP       "192.168.X.X"
+#define NEO_API_PORT 7376
+
+// ── TCP Server (puerto que escucha comandos del PC de test) ──
+#define TCP_PORT 9999
+
+// ── Pines: ESP32-S3 DevKitC-1 N16R8 + DRV8825 ──────────────
+// GPIO19/20 reservados para USB OTG (HID). GPIO43/44 para CH343 UART.
+#define PIN_STEP       4
+#define PIN_DIR        5
+#define PIN_EN         6    // active LOW (DRV8825 EN)
+#define PIN_M0         7    // microstepping
+#define PIN_M1         8
+#define PIN_M2         9
+#define PIN_HOME_SW   10    // INPUT_PULLUP, active LOW — fin de carrera arriba
+#define PIN_SAFETY_SW 11    // INPUT_PULLUP, active LOW — fin de carrera abajo
+
+// ── Parámetros de movimiento (calibrar en Sprint 0) ─────────
+#define FAST_SPEED            500     // steps/sec — fase rápida
+#define CREEP_SPEED            80     // steps/sec — fase lenta (detección contacto)
+#define BACKLASH_STEPS         40     // sobrecarrera anti-backlash (~0.25mm tornillo M8)
+#define APPROACH_MARGIN_STEPS 300     // steps antes del punto de contacto esperado
+#define CONTACT_THRESHOLD_G    30.0f  // umbral de detección de contacto en gramos
+
+// PLACEHOLDER — calibrar en Sprint 0
+#define STEPS_PER_GRAM          5.0f
