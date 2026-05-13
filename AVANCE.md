@@ -1,5 +1,5 @@
 # CUORA NEO — Estado del proyecto
-### Suite de automatización de pruebas · Actualizado: 2026-05-13
+### Suite de automatización de pruebas · Actualizado: 2026-05-13 (sesión 2)
 
 ---
 
@@ -12,14 +12,16 @@
 | Diseño del hardware | ✅ Completo | Puente portal 500mm, pin flotante, lista de materiales |
 | **Infra Python** | ✅ Creado + corregido | `tests/errors.py`, `api_client.py`, `metrology.py`, `assertions.py` |
 | **Config y env** | ✅ Creado | `config/hardware_params.yaml`, `.env.test.example` (IPs reales) |
-| **Firmware HID ESP32-S3** | ✅ Flasheado y validado | `firmware/hid/hid.ino` — TCP :9999, KEY_PRESS verificado |
+| **Firmware HID ESP32-S3** | 📦 Referencia | `firmware/hid/hid.ino` — supersedido por firmware/esp32/ |
 | **Stack HID end-to-end** | ✅ Validado | KEY_PRESS F4 → balanza ejecutó CERO (0.014→0.000 kg) |
 | **SVG puente portal** | ✅ Diseñado | `assets/puente-portal-actuador.svg` — T_BANDEJA=162mm, telescópico 380–560mm |
-| **Firmware actuador (pin)** | ✅ Listo para flashear | `firmware/actuator/` — SET_WEIGHT/HOME/ZERO, hardware no construido |
-| **Firmware actuador (electroimán)** | ❌ Descartado | `firmware/actuator-electroiman/` — diseño descartado, se usa pin NBR |
-| Tests de aplicación | ❌ No iniciado | Cypress (Fases 1-2), pytest (Fases 3-4) |
-| **Hardware físico (puente portal)** | ❌ No construido | SVG listo para herrero — sin rack (design B descartado) |
-| Sprint 0 — curva de estabilización | 🟡 Pendiente hardware | Construir portal primero |
+| **Firmware actuador (pin)** | 📦 Referencia | `firmware/actuator/` — supersedido por firmware/esp32/ |
+| **Firmware ESP32 unificado** | ✅ Listo para flashear | `firmware/esp32/` — HID + Actuador en un solo ESP32-S3 |
+| **Firmware actuador (electroimán)** | ❌ Descartado | `firmware/actuator-electroiman/` — diseño descartado 2026-05-13 |
+| **Clientes Python + test prototipo** | ✅ Creado | `actuator_client`, `hid_client`, `poll_utils`, `conftest`, `test_tare_product` |
+| Tests de aplicación | ❌ No iniciado | Cypress (Fases 1-2), pytest SSH/VNC (Fases 3-4) |
+| **Hardware físico (puente portal)** | ❌ No construido | SVG listo — BLOQUEANTE para todo lo que sigue |
+| Sprint 0 — curva de estabilización | 🟡 Pendiente hardware | Ejecutar tras construir portal y flashear ESP32 |
 
 **Archivos creados y validados:**
 ```
@@ -28,18 +30,22 @@ tests/errors.py                               ← jerarquía de excepciones tipa
 tests/api_client.py                           ← NEOApiClient (§17) — bugs corregidos 2026-05-12
 tests/metrology.py                            ← MetrologyProfile + build_profile() (§23)
 tests/assertions.py                           ← assert_weight, assert_overload_triggered... (§24)
+tests/actuator_client.py                      ← TCP client para ESP32 actuador ← NUEVO
+tests/hid_client.py                           ← TCP client para ESP32 HID ← NUEVO
+tests/poll_utils.py                           ← poll_until_stable() (§6.5) ← NUEVO
+tests/conftest.py                             ← fixtures pytest: api/actuator/hid/profile ← NUEVO
+tests/test_tare_product.py                    ← prototipo: tara + peso producto (13 pasos) ← NUEVO
 config/hardware_params.yaml                   ← parámetros físicos + metrología AR/BR/US (§16 + §22.3)
-.env.test.example                             ← plantilla con IPs reales del entorno
+.env.test.example                             ← plantilla — NEO_ESP32_IP único (un solo ESP32)
 
-firmware/actuator/platformio.ini              ← PlatformIO ESP32-S3 DevKitC-1 N16R8
-firmware/actuator/include/config.h            ← pines y constantes de movimiento (APROBADO)
-firmware/actuator/src/main.cpp                ← actuador pin NBR: SET_WEIGHT/HOME/ZERO (APROBADO)
+firmware/esp32/platformio.ini                 ← FIRMWARE ACTIVO — PlatformIO ESP32-S3 ← NUEVO
+firmware/esp32/include/config.h               ← pines y constantes (igual que actuator/)
+firmware/esp32/src/main.cpp                   ← HID + Actuador fusionados ← NUEVO
+                                                 Comandos: SET_WEIGHT/HOME/ZERO/STATUS/SET_CALIBRATION/KEY_PRESS
 
-firmware/actuator-electroiman/platformio.ini  ← mismo board (DISEÑO PARALELO — no flashear aún)
-firmware/actuator-electroiman/include/config.h← config + PIN_MAGNET, slots, HOME_HEIGHT_MM
-firmware/actuator-electroiman/src/main.cpp    ← PICK/LIFT/MAGNET_ON/OFF, tray_count
-
-firmware/hid/hid.ino                          ← HID teclado — flasheado y validado ✅
+firmware/actuator/                            ← REFERENCIA HISTÓRICA — no flashear
+firmware/actuator-electroiman/                ← DESCARTADO — no flashear
+firmware/hid/hid.ino                          ← REFERENCIA HISTÓRICA — no flashear
 
 assets/puente-portal-actuador.svg             ← plano del puente portal (T_BANDEJA=162mm)
 assets/pesas.jpeg                             ← foto inventario pesas DOLZ disponibles
@@ -49,7 +55,7 @@ docs/CUORA-NEO-manual.pdf
 docs/ESP32-DevKitC.docx
 docs/PM-objetivos.xlsx                        ← objetivos DB-4.x del PM
 docs/informes/                                ← informes de avance generados
-docs/analysis/analisis-impacto-electroiman.md ← riesgos y dependencias del diseño con electroimán
+docs/analysis/analisis-impacto-electroiman.md ← análisis descartado (referencia)
 ```
 
 ---
@@ -121,34 +127,37 @@ PC → TCP 192.168.100.202:9999 → ESP32 → USB HID → Balanza 192.168.100.12
 
 ## Lo próximo a hacer (en orden)
 
-### 1. Decidir diseño del actuador y actualizar SVG del portal
+### 1. Construir el portal físico (BLOQUEANTE CRÍTICO)
 
-Antes de ir al herrero hay que decidir qué firmware se usará:
+**Decisión tomada:** firmware pin NBR + HID unificados en `firmware/esp32/`. SVG no requiere cambios (diseño B descartado).
 
-**Opción A — Pin fijo (aprobado):** pesa física en la bandeja, motor aplica fuerza.
-Firmware: `firmware/actuator/` (listo para flashear).
-
-**Opción B — Electroimán (paralelo):** PICK/LIFT automático de pesas DOLZ.
-Firmware: `firmware/actuator-electroiman/` (listo para flashear).
-Análisis completo: `docs/analysis/analisis-impacto-electroiman.md`.
-
-⚠️ **Si se elige Opción B**, actualizar el SVG antes de enviarlo al herrero:
-- Reemplazar punta NBR por electroimán Ø35mm
-- Agregar rack de 4 pegs en pata izquierda (alturas: 430/390/350/310mm desde mesa)
-- Agregar conducto cable 12V por columna
-
-**Inventario de pesas disponibles (DOLZ):**
-- 2 kg × 1 (hierro fundido, ferromagnético)
-- 1 kg × 1 (hierro fundido, ferromagnético)
-- 500 g × 2–3 (latón — si Opción B: pegar arandela M6 encima, pesar tras mod)
-
-Falta construir la parte mecánica:
-- Puente portal telescópico (SVG en `assets/puente-portal-actuador.svg`)
+Enviar `assets/puente-portal-actuador.svg` al herrero para fabricar:
+- Puente portal telescópico 380–560mm (acero 40×40×3mm + 30×30×2mm)
+- Carro con guías Ø8mm, husillo M8 paso 1.25mm
 - Motor NEMA17 + driver DRV8825
-- Fin de carrera home + seguridad
+- Fin de carrera HOME (arriba) + SAFETY (abajo)
 - Ver lista de materiales en **§5** y **§11** del plan
 
-### 2. Sprint 0 — curva de estabilización (1–2 días con hardware)
+### 2. Flashear firmware/esp32/ al ESP32-S3
+
+```bash
+# Desde VS Code con PlatformIO:
+# 1. Copiar firmware/esp32/include/config.h.example → config.h
+# 2. Completar WIFI_SSID, WIFI_PASS, NEO_IP
+# 3. PlatformIO: Upload (COM4)
+# 4. Verificar Serial Monitor: "USB HID keyboard ready — sistema listo"
+```
+
+Verificación rápida desde PC:
+```bash
+echo '{"cmd":"STATUS"}' | nc 192.168.100.202 9999
+# → {"status":"ok","state":"IDLE","steps":0,"hid":"ready"}
+
+echo '{"cmd":"KEY_PRESS","key":"F4"}' | nc 192.168.100.202 9999
+# → balanza ejecuta CERO ← confirma HID funcionando
+```
+
+### 3. Sprint 0 — curva de estabilización (1–2 días con hardware)
 
 Ejecutar `scripts/sprint0_estabilizacion.py` para medir cuánto tarda el sensor
 en estabilizarse. **Sin este dato, `max_wait_s` en `poll_until_stable()` es una adivinanza.**
@@ -162,11 +171,12 @@ python scripts/sprint0_estabilizacion.py
 
 Checklist completo: ver **§4 Fase 0** del plan.
 
-### 3. Completar `.env.test`
+### 4. Completar `.env.test`
 
 ```bash
 cp .env.test.example .env.test
-# IPs ya conocidas. Completar solo:
+# Completar:
+#   NEO_ESP32_IP=192.168.100.202   ← IP del ESP32-S3 unificado
 #   NEO_SSH_USER, NEO_SSH_PASS o KEY_PATH
 #   NEO_DB_NAME, NEO_DB_USER, NEO_DB_PASS
 ```
@@ -177,7 +187,12 @@ ssh systel@192.168.100.123 uptime    # confirmar usuario SSH
 # VNC: vncviewer 192.168.100.123:5900
 ```
 
-### 4. Fase 1 — Cypress API (1 semana)
+Primer test con hardware completo:
+```bash
+pytest tests/test_tare_product.py -v
+```
+
+### 5. Fase 1 — Cypress API (1 semana, independiente del portal)
 
 Prerequisito: Sprint 0 ejecutado + `.env.test` completo.
 
@@ -225,23 +240,27 @@ Primer test: `cypress/e2e/api/connectivity.cy.js`
   tests/api_client.py                              ← fix: coma decimal en weight, ping string
   tests/metrology.py
   tests/assertions.py
+  tests/actuator_client.py                         ← TCP client para ESP32 actuador
+  tests/hid_client.py                              ← TCP client para ESP32 HID
+  tests/poll_utils.py                              ← poll_until_stable() (§6.5)
+  tests/conftest.py                                ← fixtures pytest: api/actuator/hid/profile
+  tests/test_tare_product.py                       ← prototipo tara+producto (13 pasos)
   config/hardware_params.yaml
-  .env.test.example                               ← IPs reales del entorno
-  assets/puente-portal-actuador.svg               ← plano portal T_BANDEJA=162mm ← NUEVO
-  firmware/actuator/platformio.ini
-  firmware/actuator/include/config.h              ← APROBADO (pin NBR)
-  firmware/actuator/src/main.cpp                  ← APROBADO (sin flashear — HW no construido)
-  firmware/actuator-electroiman/platformio.ini    ← PARALELO ← NUEVO
-  firmware/actuator-electroiman/include/config.h  ← PARALELO ← NUEVO
-  firmware/actuator-electroiman/src/main.cpp      ← PARALELO ← NUEVO
-  firmware/hid/hid.ino                            ← flasheado y validado ✅
-  docs/analysis/analisis-impacto-electroiman.md   ← riesgos/dependencias ← NUEVO
+  .env.test.example                               ← NEO_ESP32_IP único (un solo ESP32)
+  assets/puente-portal-actuador.svg               ← plano portal T_BANDEJA=162mm
+  firmware/esp32/platformio.ini                   ← FIRMWARE ACTIVO (HID + Actuador)
+  firmware/esp32/include/config.h                 ← pines y constantes
+  firmware/esp32/src/main.cpp                     ← listo para flashear ✅
+  firmware/actuator/                              ← REFERENCIA HISTÓRICA (no flashear)
+  firmware/actuator-electroiman/                  ← DESCARTADO (no flashear)
+  firmware/hid/hid.ino                            ← REFERENCIA HISTÓRICA (no flashear)
+  docs/analysis/analisis-impacto-electroiman.md   ← análisis descartado (referencia)
 
 ❌ Pendientes — crear en este orden:
-  scripts/sprint0_estabilizacion.py    ← §4 Fase 0
-  scripts/calibracion_bandeja.py       ← §6.2
+  scripts/sprint0_estabilizacion.py    ← §4 Fase 0 (requiere hardware)
+  scripts/calibracion_bandeja.py       ← §6.2 (requiere hardware)
 
-  Fase 1 (Cypress API):
+  Fase 1 (Cypress API) — NO requiere portal:
     cypress/package.json
     cypress/cypress.config.js
     cypress/support/commands.js
@@ -259,7 +278,6 @@ Primer test: `cypress/e2e/api/connectivity.cy.js`
     cypress/e2e/web/config.cy.js
 
   Fase 3 (pytest SSH):
-    tests/conftest.py
     tests/ssh/conftest.py
     tests/ssh/test_system_health.py
     tests/ssh/test_db_state.py
@@ -288,9 +306,10 @@ Primer test: `cypress/e2e/api/connectivity.cy.js`
 | Tests usan `cal["700"]`, nunca `700` directamente | El peso nominal difiere del medido — siempre usar calibración de sesión |
 | PLUs de test en rango 90000–99999 | Evita colisión con datos reales del comercio |
 | WiFi + TCP server init antes que USB HID | El kernel de la balanza se congela si recibe HID durante su init |
-| `firmware/actuator/` es el diseño aprobado | Pin NBR + fuerza por motor. No modificar sin decisión explícita |
-| `firmware/actuator-electroiman/` es paralelo | Electroimán PICK/LIFT — no reemplaza al aprobado hasta validar hardware |
-| SVG del portal debe actualizarse antes del herrero | Si se elige electroimán, el rack de 4 pegs debe quedar en el plano de fabricación |
+| `firmware/esp32/` es el firmware activo | HID + Actuador fusionados en un solo ESP32-S3. No modificar `firmware/actuator/` ni `firmware/hid/` |
+| `firmware/actuator-electroiman/` está descartado | Diseño de electroimán descartado 2026-05-13. Mantener solo como documentación |
+| SVG del portal listo para el herrero tal como está | Diseño B (electroimán) descartado — sin rack de pesas, sin cambios al SVG |
+| `poll_until_stable()` usa `abs(expected_kg)` para tolerancia | Permite manejar lecturas negativas (ej. tara activa sin peso) — no cambiar |
 
 ---
 
