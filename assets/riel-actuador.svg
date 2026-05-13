@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 780" width="1100" height="780">
+<defs>
+  <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <path d="M0,0 L8,3 L0,6 Z" fill="#444"/>
+  </marker>
+  <marker id="ahr" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto">
+    <path d="M8,0 L0,3 L8,6 Z" fill="#444"/>
+  </marker>
+</defs>
+
+<!-- BG -->
+<rect width="1100" height="780" fill="#f5f7fa"/>
+
+<!-- HEADER -->
+<rect x="0" y="0" width="1100" height="56" fill="#1e2d4a"/>
+<text x="550" y="23" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="bold" fill="white">ACTUADOR DE PESO — RIEL LINEAL VERTICAL</text>
+<text x="550" y="44" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#99aacc">Suite Pruebas CUORA NEO (Systel) · Rev 1.0 · 2026-05-06 · Material base: Acero S235</text>
+
+<!-- PANEL DIVIDER -->
+<line x1="650" y1="58" x2="650" y2="730" stroke="#bbccdd" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+<!-- =================== PANEL IZQUIERDO: VISTA FRONTAL =================== -->
+<text x="310" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#1e2d4a" letter-spacing="1">VISTA FRONTAL</text>
+
+<!-- BALANCE (referencia en primer plano) -->
+<rect x="370" y="630" width="250" height="65" rx="4" fill="#c8d4e0" stroke="#8898aa" stroke-width="1.5"/>
+<rect x="348" y="612" width="294" height="18" rx="3" fill="#dce8f0" stroke="#8898aa" stroke-width="1.5"/>
+<text x="495" y="668" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#445566">BALANZA CUORA NEO</text>
+<text x="495" y="622" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#778899">Bandeja inox 240×365mm</text>
+
+<!-- Goma antivibración (4 almohadillas) -->
+<rect x="112" y="604" width="30" height="9" rx="2" fill="#1a1a1a" opacity="0.75"/>
+<rect x="308" y="604" width="30" height="9" rx="2" fill="#1a1a1a" opacity="0.75"/>
+<text x="225" y="617" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#555">~~~ Goma AV 5mm ~~~</text>
+
+<!-- Placa base -->
+<rect x="88" y="590" width="274" height="14" rx="2" fill="#8a9fba" stroke="#607090" stroke-width="1.5"/>
+<text x="225" y="601" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="white">PLACA BASE 200×150mm — chapa 4mm</text>
+
+<!-- Columna izquierda (tubo 20×20, ~290mm) -->
+<rect x="88" y="294" width="28" height="296" fill="#7a8faa" stroke="#506090" stroke-width="1.5"/>
+<rect x="94" y="300" width="16" height="284" fill="#9ab0c8" opacity="0.35"/>
+
+<!-- Columna derecha -->
+<rect x="334" y="294" width="28" height="296" fill="#7a8faa" stroke="#506090" stroke-width="1.5"/>
+<rect x="340" y="300" width="16" height="284" fill="#9ab0c8" opacity="0.35"/>
+
+<!-- Rótulos de columnas -->
+<text x="72" y="445" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#5a7090" transform="rotate(-90,72,445)">Columna 20×20mm — ~290mm</text>
+<text x="378" y="445" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#5a7090" transform="rotate(90,378,445)">Columna 20×20mm — ~290mm</text>
+
+<!-- Travesaño superior -->
+<rect x="88" y="266" width="274" height="28" fill="#7a8faa" stroke="#506090" stroke-width="1.5"/>
+<text x="225" y="283" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="white">TRAVESAÑO — Tubo 20×20mm</text>
+
+<!-- Motor NEMA 17 -->
+<rect x="172" y="202" width="106" height="64" rx="5" fill="#e09020" stroke="#b07000" stroke-width="2"/>
+<text x="225" y="229" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white">NEMA 17</text>
+<text x="225" y="244" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="white">40 Ncm · 1.8°/paso</text>
+<text x="225" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#ffe090">Driver: DRV8825</text>
+
+<!-- Coupler flexible -->
+<rect x="209" y="182" width="32" height="20" rx="3" fill="#607090" stroke="#405070" stroke-width="1.5"/>
+<text x="248" y="194" font-family="Arial,sans-serif" font-size="8" fill="#506080">coupler M5→M8</text>
+
+<!-- Varilla M8 roscada (lead screw, centro) -->
+<line x1="225" y1="182" x2="225" y2="590" stroke="#4a60a0" stroke-width="4"/>
+
+<!-- Guías Ø8mm (80mm=104px entre centros, centradas en 225) -->
+<!-- Guía izq: x=225-52=173 / Guía der: x=225+52=277 -->
+<line x1="173" y1="294" x2="173" y2="590" stroke="#8899bb" stroke-width="7"/>
+<line x1="277" y1="294" x2="277" y2="590" stroke="#8899bb" stroke-width="7"/>
+<text x="155" y="445" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#6a7a9a" transform="rotate(-90,155,445)">Guía Ø8mm × 250mm</text>
+<text x="300" y="445" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#6a7a9a" transform="rotate(-90,300,445)">Guía Ø8mm × 250mm</text>
+
+<!-- Carro (posición media, y=420-500) -->
+<rect x="155" y="420" width="140" height="80" rx="4" fill="#96aec2" stroke="#6080a0" stroke-width="2"/>
+<!-- Rodamientos lineales en el carro -->
+<circle cx="173" cy="460" r="10" fill="#506080"/>
+<circle cx="277" cy="460" r="10" fill="#506080"/>
+<!-- Tuerca M8 en el carro -->
+<rect x="218" y="446" width="14" height="28" rx="2" fill="#607090"/>
+<text x="225" y="512" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#334466">CARRO</text>
+<text x="225" y="523" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#556677">80×60mm — chapa 5mm</text>
+<!-- Indicador viaje -->
+<text x="148" y="392" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#5080b0">↕</text>
+<text x="148" y="405" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#5080b0">220mm</text>
+
+<!-- Limit switch (homing) -->
+<rect x="88" y="556" width="20" height="13" rx="2" fill="#cc2222" stroke="#991111" stroke-width="1"/>
+<text x="76" y="564" text-anchor="end" font-family="Arial,sans-serif" font-size="7" fill="#bb1111">HOME</text>
+<text x="76" y="572" text-anchor="end" font-family="Arial,sans-serif" font-size="7" fill="#bb1111">sw</text>
+
+<!-- BRAZO (pletina 5×20mm, 20mm vertical = 26px, 150mm = 195px) -->
+<!-- Sale del lado derecho del carro (x=295), centrado en y=460 -->
+<rect x="295" y="447" width="195" height="26" rx="2" fill="#8090b0" stroke="#5060a0" stroke-width="2"/>
+<text x="393" y="462" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="white">BRAZO — Pletina 5×20mm (20mm VERTICAL ✓)</text>
+<!-- Indicador de soldadura brazo-carro -->
+<text x="297" y="444" font-family="Arial,sans-serif" font-size="11" fill="#dd4400">▲</text>
+<text x="277" y="488" font-family="Arial,sans-serif" font-size="7" fill="#dd4400">SOLD.</text>
+
+<!-- PIN Ø10mm bajando desde extremo del brazo -->
+<!-- Extremo del brazo: x=490. Fondo del brazo: y=473. Pin baja 156px (120mm) hasta y=629 -->
+<rect x="484" y="473" width="13" height="156" rx="2" fill="#6878a0" stroke="#4858a0" stroke-width="1.5"/>
+<text x="502" y="553" font-family="Arial,sans-serif" font-size="8" fill="#4a5a7a">Pin</text>
+<text x="502" y="563" font-family="Arial,sans-serif" font-size="8" fill="#4a5a7a">Ø10mm</text>
+
+<!-- PESAS DOLZ apiladas en el pin (desde y=473 bajando, ranura C alrededor del pin) -->
+<!-- Las pesas se ensartan por la ranura C sobre el pin vertical -->
+<!-- 200g (bronce/dorado) — arriba del todo -->
+<rect x="462" y="478" width="54" height="18" rx="3" fill="#d4a020" stroke="#906600" stroke-width="1.5"/>
+<rect x="481" y="478" width="16" height="6" fill="#f0f0d0" opacity="0.6"/>
+<text x="455" y="490" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#806000">200 g</text>
+
+<!-- 500g (bronce/dorado) -->
+<rect x="459" y="498" width="60" height="22" rx="3" fill="#b8860b" stroke="#906600" stroke-width="1.5"/>
+<rect x="481" y="498" width="16" height="7" fill="#f0f0d0" opacity="0.6"/>
+<text x="455" y="513" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#806000">500 g</text>
+
+<!-- 1kg (hierro/gris) -->
+<rect x="456" y="522" width="66" height="26" rx="3" fill="#686868" stroke="#333" stroke-width="1.5"/>
+<rect x="481" y="522" width="16" height="8" fill="#f0f0d0" opacity="0.5"/>
+<text x="455" y="538" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#333">1 kg</text>
+
+<!-- 2kg (hierro/gris, más grande) -->
+<rect x="453" y="550" width="72" height="32" rx="3" fill="#4a4a4a" stroke="#222" stroke-width="1.5"/>
+<rect x="481" y="550" width="16" height="10" fill="#f0f0d0" opacity="0.5"/>
+<text x="455" y="570" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#222">2 kg</text>
+
+<!-- Total label -->
+<text x="455" y="590" text-anchor="end" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#1a5a1a">= 3.7 kg</text>
+
+<!-- Almohadilla de goma en extremo del pin -->
+<ellipse cx="490" cy="629" rx="9" ry="5" fill="#111" opacity="0.8"/>
+
+<!-- Flecha descendente indicando movimiento al bajar -->
+<line x1="490" y1="635" x2="490" y2="648" stroke="#cc2222" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#ah)"/>
+<text x="504" y="644" font-family="Arial,sans-serif" font-size="8" fill="#cc2222">desciende</text>
+<text x="504" y="654" font-family="Arial,sans-serif" font-size="8" fill="#cc2222">→ toca bandeja</text>
+
+<!-- ---- LÍNEAS DE COTA ---- -->
+
+<!-- Alto total ~380mm -->
+<line x1="60" y1="266" x2="60" y2="590" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="48" y="432" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#444" transform="rotate(-90,48,432)">~380 mm alto total</text>
+
+<!-- Ancho entre columnas 160mm -->
+<line x1="88" y1="660" x2="362" y2="660" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="225" y="656" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#444">160 mm ancho</text>
+
+<!-- Separación guías 80mm -->
+<line x1="173" y1="310" x2="277" y2="310" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="225" y="307" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#444">80 mm guías</text>
+
+<!-- Largo brazo 150mm -->
+<line x1="295" y1="440" x2="490" y2="440" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="393" y="437" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#444">150 mm brazo</text>
+
+<!-- Alto pin 120mm -->
+<line x1="502" y1="473" x2="502" y2="629" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="514" y="554" font-family="Arial,sans-serif" font-size="8" fill="#444">120 mm</text>
+
+<!-- Escala visual -->
+<line x1="80" y1="710" x2="210" y2="710" stroke="#888" stroke-width="2"/>
+<line x1="80" y1="705" x2="80" y2="715" stroke="#888" stroke-width="2"/>
+<line x1="210" y1="705" x2="210" y2="715" stroke="#888" stroke-width="2"/>
+<text x="145" y="724" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888">100 mm (aprox.)</text>
+
+<!-- =================== PANEL DERECHO: DETALLE + ANÁLISIS =================== -->
+<text x="875" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#1e2d4a" letter-spacing="1">ANÁLISIS ESTRUCTURAL + DETALLE BRAZO/PIN</text>
+
+<!-- Caja de análisis estructural -->
+<rect x="658" y="92" width="432" height="296" rx="6" fill="white" stroke="#aabbcc" stroke-width="1.5"/>
+
+<!-- Motor -->
+<text x="668" y="114" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#1e2d4a">Motor NEMA 17 + Varilla M8</text>
+<line x1="658" y1="120" x2="1090" y2="120" stroke="#dde" stroke-width="1"/>
+<text x="668" y="135" font-family="Arial,sans-serif" font-size="10" fill="#333">Torque 40Ncm → Fuerza axial = 2π × 0.40 × 0.35 / 0.00125 = 704 N ≈ 70 kg teórico</text>
+<text x="668" y="150" font-family="Arial,sans-serif" font-size="10" fill="#333">Fuerza práctica (fricción guías): 35–50 kg  |  Carga real: 4.2 kg (pesas + carro)</text>
+<text x="668" y="165" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#1a7a1a">Margen motor: 8×–12×  ✓  |  Rosca M8 autobloqueante (carro no cae sin corriente) ✓</text>
+
+<!-- Pin -->
+<line x1="658" y1="174" x2="1090" y2="174" stroke="#dde" stroke-width="1"/>
+<text x="668" y="190" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#1e2d4a">Pin Ø10mm — Flexión en soldadura al brazo</text>
+<text x="668" y="205" font-family="Arial,sans-serif" font-size="10" fill="#333">Carga dinámica (×2.5): 92 N  |  Brazo de momento: 60 mm (centro de pesas al empotramiento)</text>
+<text x="668" y="220" font-family="Arial,sans-serif" font-size="10" fill="#333">M = 5,520 Nmm  |  Z (Ø10) = 98.2 mm³  |  σ = 56 MPa  |  Límite S235 = 235 MPa</text>
+<text x="668" y="235" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#1a7a1a">Factor seguridad = 4.2  ✓  (NO reducir a Ø8mm)</text>
+
+<!-- Brazo -->
+<line x1="658" y1="244" x2="1090" y2="244" stroke="#dde" stroke-width="1"/>
+<text x="668" y="260" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#1e2d4a">Brazo 150mm — Flexión en empotramiento (carro)</text>
+<text x="668" y="275" font-family="Arial,sans-serif" font-size="10" fill="#333">M = 92 N × 150 mm = 13,800 Nmm  |  Fuerza total de diseño: 92 N</text>
+
+<!-- Tabla de secciones -->
+<rect x="662" y="280" width="422" height="22" rx="2" fill="#eef0f8"/>
+<text x="668" y="294" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#334">Sección del brazo</text>
+<text x="798" y="294" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#334">Z (mm³)</text>
+<text x="868" y="294" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#334">σ (MPa)</text>
+<text x="938" y="294" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#334">Factor</text>
+<text x="1000" y="294" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#334">Decisión</text>
+
+<rect x="662" y="302" width="422" height="18"/>
+<text x="668" y="314" font-family="Arial,sans-serif" font-size="9" fill="#cc2200">Varilla Ø10mm</text>
+<text x="798" y="314" font-family="Arial,sans-serif" font-size="9" fill="#cc2200">98.2</text>
+<text x="868" y="314" font-family="Arial,sans-serif" font-size="9" fill="#cc2200">141</text>
+<text x="938" y="314" font-family="Arial,sans-serif" font-size="9" fill="#cc2200">1.67</text>
+<text x="1000" y="314" font-family="Arial,sans-serif" font-size="9" fill="#cc2200">✗ NO usar</text>
+
+<rect x="662" y="320" width="422" height="18" fill="#fffbee"/>
+<text x="668" y="332" font-family="Arial,sans-serif" font-size="9" fill="#cc6600">Varilla Ø12mm</text>
+<text x="798" y="332" font-family="Arial,sans-serif" font-size="9" fill="#cc6600">169.6</text>
+<text x="868" y="332" font-family="Arial,sans-serif" font-size="9" fill="#cc6600">81</text>
+<text x="938" y="332" font-family="Arial,sans-serif" font-size="9" fill="#cc6600">2.9</text>
+<text x="1000" y="332" font-family="Arial,sans-serif" font-size="9" fill="#cc6600">○ Aceptable</text>
+
+<rect x="662" y="338" width="422" height="20" fill="#eaf8ea"/>
+<text x="668" y="352" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a6a1a">Pletina 5×20mm (20mm vertical)</text>
+<text x="798" y="352" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a6a1a">333</text>
+<text x="868" y="352" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a6a1a">41</text>
+<text x="938" y="352" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a6a1a">5.7</text>
+<text x="1000" y="352" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a6a1a">✓✓ USAR ESTE</text>
+
+<!-- ORIENTACIÓN DEL BRAZO -->
+<text x="875" y="406" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1e2d4a">Orientación del Brazo — Sección Transversal</text>
+
+<!-- CORRECTO -->
+<rect x="668" y="416" width="200" height="100" rx="4" fill="#edfaed" stroke="#4a8a4a" stroke-width="1.5"/>
+<text x="768" y="433" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#1a5a1a">✓ CORRECTO</text>
+<!-- 5×20 pletina vertical: 5px ancho, 30px alto (representación) -->
+<rect x="760" y="440" width="14" height="36" rx="1" fill="#8090b0" stroke="#5060a0" stroke-width="2"/>
+<!-- Flecha de carga -->
+<line x1="767" y1="482" x2="767" y2="470" stroke="#cc2222" stroke-width="2" marker-end="url(#ah)"/>
+<text x="785" y="476" font-family="Arial,sans-serif" font-size="8" fill="#cc2222">F ↓</text>
+<text x="768" y="500" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#335">5mm ancho · 20mm ↕</text>
+<text x="768" y="512" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a6a1a">Factor seg.: 5.7</text>
+
+<!-- INCORRECTO -->
+<rect x="882" y="416" width="200" height="100" rx="4" fill="#fdeaea" stroke="#aa3333" stroke-width="1.5"/>
+<text x="982" y="433" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#8a1a1a">✗ INCORRECTO</text>
+<!-- 5×20 pletina horizontal: 30px ancho, 6px alto -->
+<rect x="967" y="454" width="30" height="8" rx="1" fill="#d07070" stroke="#a04040" stroke-width="2"/>
+<text x="982" y="480" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#882222">20mm ↔ · 5mm ↕</text>
+<text x="982" y="492" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#cc1111">Factor seg.: 1.4 — FALLA</text>
+<text x="982" y="504" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#882222">(error típico del herrero)</text>
+<text x="982" y="514" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#882222">indicar explícitamente</text>
+
+<!-- DETALLE PIN + PESAS DOLZ -->
+<text x="875" y="540" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1e2d4a">Detalle Pin — Ensamble Pesas DOLZ (ranura C)</text>
+
+<!-- Carro (bloque) -->
+<rect x="658" y="555" width="60" height="110" rx="3" fill="#96aec2" stroke="#6080a0" stroke-width="1.5"/>
+<text x="688" y="614" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#334">CARRO</text>
+
+<!-- Brazo -->
+<rect x="718" y="592" width="200" height="20" rx="2" fill="#8090b0" stroke="#5060a0" stroke-width="1.5"/>
+<text x="818" y="605" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="white">Pletina 5×20mm (20mm VERTICAL)</text>
+
+<!-- Punto de soldadura -->
+<circle cx="718" cy="602" r="7" fill="none" stroke="#dd4400" stroke-width="2"/>
+<line x1="724" y1="597" x2="744" y2="582" stroke="#dd4400" stroke-width="1"/>
+<text x="746" y="579" font-family="Arial,sans-serif" font-size="8" fill="#dd4400">Soldadura completa</text>
+<text x="746" y="589" font-family="Arial,sans-serif" font-size="8" fill="#dd4400">4 lados 5mm gar.</text>
+<text x="746" y="599" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#dd4400">(punto CRÍTICO)</text>
+
+<!-- Pin bajando desde extremo del brazo -->
+<rect x="912" y="612" width="10" height="90" rx="1" fill="#6878a0" stroke="#4858a0" stroke-width="1.5"/>
+
+<!-- Pesas (ranura C visible lateralmente) -->
+<!-- 200g -->
+<rect x="892" y="617" width="50" height="16" rx="2" fill="#d4a020" stroke="#906600" stroke-width="1.5"/>
+<rect x="909" y="617" width="16" height="5" fill="#f0f0d0" opacity="0.65"/>
+<!-- 500g -->
+<rect x="890" y="635" width="54" height="20" rx="2" fill="#b8860b" stroke="#906600" stroke-width="1.5"/>
+<rect x="909" y="635" width="16" height="6" fill="#f0f0d0" opacity="0.65"/>
+<!-- 1kg -->
+<rect x="888" y="657" width="58" height="22" rx="2" fill="#686868" stroke="#444" stroke-width="1.5"/>
+<rect x="909" y="657" width="16" height="7" fill="#f0f0d0" opacity="0.55"/>
+<!-- 2kg -->
+<rect x="886" y="681" width="62" height="26" rx="2" fill="#4a4a4a" stroke="#222" stroke-width="1.5"/>
+<rect x="909" y="681" width="16" height="9" fill="#f0f0d0" opacity="0.5"/>
+
+<!-- Etiquetas de pesas -->
+<text x="958" y="629" font-family="Arial,sans-serif" font-size="9" fill="#805000">200 g bronce</text>
+<text x="958" y="649" font-family="Arial,sans-serif" font-size="9" fill="#805000">500 g bronce</text>
+<text x="958" y="671" font-family="Arial,sans-serif" font-size="9" fill="#444">1 kg  hierro</text>
+<text x="958" y="695" font-family="Arial,sans-serif" font-size="9" fill="#333">2 kg  hierro</text>
+<text x="958" y="712" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a5a1a">Total: 3.7 kg | 15 combinaciones</text>
+
+<!-- Nota ranura C -->
+<line x1="916" y1="622" x2="946" y2="615" stroke="#778899" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="662" y="712" font-family="Arial,sans-serif" font-size="8" fill="#667788">ℹ Ranura C: pesa se ensarta lateralmente sobre el pin. Luz de ranura ≥ 11mm para Ø10.</text>
+
+<!-- FOOTER -->
+<rect x="0" y="730" width="1100" height="50" fill="#1e2d4a"/>
+<text x="20" y="750" font-family="Arial,sans-serif" font-size="10" fill="#99aacc">Herrero fabrica: tubo 20×20mm · chapa 4–5mm · pletina 5×20mm (20mm VERTICAL) · varilla Ø10mm (pin)</text>
+<text x="20" y="768" font-family="Arial,sans-serif" font-size="9" fill="#6677aa">Comprar: NEMA17 40Ncm · DRV8825 · fuente 12V · varilla M8 roscada · guías Ø8mm · LM8UU × 2 · coupler M5→M8 · microswitch</text>
+<text x="1080" y="750" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#99aacc">Plano de referencia — no apto para certificación estructural</text>
+<text x="1080" y="768" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#6677aa">Ver BoM completo en el plan de implementación</text>
+</svg>

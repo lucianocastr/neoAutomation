@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 860" width="1280" height="860">
+<defs>
+  <marker id="ah"  markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#333"/></marker>
+  <marker id="ahr" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto"><path d="M8,0 L0,3 L8,6 Z" fill="#333"/></marker>
+  <marker id="ahw" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#fff"/></marker>
+</defs>
+
+<!-- BG -->
+<rect width="1280" height="860" fill="#f4f6fa"/>
+
+<!-- HEADER -->
+<rect x="0" y="0" width="1280" height="58" fill="#1a2d4a"/>
+<text x="640" y="22" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="bold" fill="white">PUENTE PORTAL — ACTUADOR HIL CUORA NEO-2</text>
+<text x="640" y="43" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#8aaad0">Rev 2.0 · 2026-05-12 · Material: Acero S235 soldado · ALTURA REGULABLE · T_BANDEJA = 162 mm (medida)</text>
+
+<!-- Panel divider -->
+<line x1="700" y1="58" x2="700" y2="810" stroke="#c0ccd8" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PANEL IZQUIERDO — VISTA FRONTAL                   -->
+<!-- ══════════════════════════════════════════════════ -->
+<text x="350" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1a2d4a" letter-spacing="1">VISTA FRONTAL  (escala aprox. 1 mm ≈ 0.78 px)</text>
+
+<!-- SCALE ref: 1mm = 0.78px, TABLE at y=770 (all heights subtract from 770) -->
+<!-- 162mm = 126px, 342mm = 267px, 462mm = 361px, 522mm = 407px, 562mm = 439px, 620mm = 484px -->
+
+<!-- TABLE SURFACE -->
+<rect x="30" y="770" width="650" height="10" rx="2" fill="#bbc8d4"/>
+<text x="355" y="793" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#6688aa">SUPERFICIE DE MESA</text>
+
+<!-- ANTI-VIB FEET (4× Ø40mm rubber, under base plates) -->
+<rect x="95"  y="761" width="34" height="9" rx="3" fill="#1a1a1a" opacity="0.7"/>
+<rect x="550" y="761" width="34" height="9" rx="3" fill="#1a1a1a" opacity="0.7"/>
+<text x="350" y="758" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#555">Pies antivibración Ø40mm×10mm — 4 piezas M8</text>
+
+<!-- BASE PLATES 120×120×5mm -->
+<rect x="87"  y="752" width="50" height="9" rx="1" fill="#8a9fba" stroke="#607090" stroke-width="1.2"/>
+<rect x="542" y="752" width="50" height="9" rx="1" fill="#8a9fba" stroke="#607090" stroke-width="1.2"/>
+
+<!-- PORTAL OUTER COLUMNS (40×40×3mm = 31px wide)
+     Portal outer span 520mm → 406px
+     Center x=350: left col outer edge x=147, right col outer edge x=553 -->
+
+<!-- LEFT outer column — lower fixed section (280mm = 218px, from y=752 up to y=534) -->
+<rect x="147" y="534" width="31" height="218" fill="#7a90a8" stroke="#506080" stroke-width="1.5"/>
+<rect x="153" y="540" width="19" height="206" fill="#9ab0c8" opacity="0.3"/>
+
+<!-- RIGHT outer column — lower fixed section -->
+<rect x="500" y="534" width="31" height="218" fill="#7a90a8" stroke="#506080" stroke-width="1.5"/>
+<rect x="506" y="540" width="19" height="206" fill="#9ab0c8" opacity="0.3"/>
+
+<!-- TELESCOPING INNER COLUMNS (30×30×2mm = 23px wide)
+     Upper section, 350mm long, extends INSIDE outer column
+     At working height, column bottom joint at 280mm = 218px from base
+     Inner column top at crossbeam bottom = 407px from table = y=363 -->
+
+<!-- LEFT inner column (x=151 to x=174, centered in outer 147-178) -->
+<rect x="151" y="363" width="23" height="211" fill="#9aafca" stroke="#708aaa" stroke-width="1.2"/>
+
+<!-- RIGHT inner column -->
+<rect x="504" y="363" width="23" height="211" fill="#9aafca" stroke="#708aaa" stroke-width="1.2"/>
+
+<!-- LOCK BOLTS (M6) — 2 per column, shown as circles -->
+<circle cx="162" cy="550" r="4" fill="#cc4400" stroke="#991100" stroke-width="1"/>
+<circle cx="162" cy="570" r="4" fill="#cc4400" stroke="#991100" stroke-width="1"/>
+<circle cx="516" cy="550" r="4" fill="#cc4400" stroke="#991100" stroke-width="1"/>
+<circle cx="516" cy="570" r="4" fill="#cc4400" stroke="#991100" stroke-width="1"/>
+<text x="132" y="553" text-anchor="end" font-family="Arial,sans-serif" font-size="7" fill="#cc4400">M6</text>
+<text x="132" y="563" text-anchor="end" font-family="Arial,sans-serif" font-size="7" fill="#cc4400">×2</text>
+
+<!-- CROSSBEAM (50×50×3mm = 39px tall, 520mm = 406px wide)
+     Bottom at 522mm = 407px from table → y=770-407=363
+     Top at y=363-39=324 -->
+<rect x="147" y="324" width="384" height="39" rx="2" fill="#6a80a0" stroke="#405070" stroke-width="1.8"/>
+<rect x="153" y="330" width="372" height="27" fill="#8aa0be" opacity="0.25"/>
+<text x="339" y="347" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="white" font-weight="bold">TRAVESAÑO  50×50×3mm — 520 mm</text>
+
+<!-- MOTOR MOUNT PLATE (60×60×4mm) on top of crossbeam, centered x=350 -->
+<rect x="320" y="316" width="60" height="8" fill="#607080" stroke="#405060" stroke-width="1.2"/>
+
+<!-- NEMA17 MOTOR (42×42mm body = 33px, shaft up) -->
+<rect x="317" y="265" width="66" height="51" rx="4" fill="#dd9010" stroke="#aa6600" stroke-width="2"/>
+<text x="350" y="287" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="white">NEMA 17</text>
+<text x="350" y="301" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#ffe090">40 Ncm · DRV8825</text>
+<text x="350" y="312" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#ffcc60">1/32 microstepping</text>
+
+<!-- Flexible coupler (5→8mm) below motor, above crossbeam -->
+<rect x="341" y="316" width="18" height="8" rx="2" fill="#506070" stroke="#304050" stroke-width="1"/>
+
+<!-- GUIDE RAILS Ø8mm — 60mm apart (47px), centered at x=350
+     x_left=350-23=327, x_right=350+23=373
+     From crossbeam top (y=324) down 280mm (218px) to y=542 -->
+<line x1="327" y1="316" x2="327" y2="542" stroke="#5566aa" stroke-width="6"/>
+<line x1="373" y1="316" x2="373" y2="542" stroke="#5566aa" stroke-width="6"/>
+
+<!-- LEAD SCREW M8 — center x=350, from coupler (y=316) down 300mm (234px) to y=550 -->
+<line x1="350" y1="316" x2="350" y2="550" stroke="#4060a0" stroke-width="3.5"/>
+
+<!-- CARRIAGE (80×60×5mm = 62×47px)
+     Shown at working/intermediate position: bottom face at 380mm from table → y=770-296=474
+     Top face: y=474-47=427 -->
+<rect x="319" y="427" width="62" height="47" rx="3" fill="#8090b0" stroke="#5060a0" stroke-width="2"/>
+<!-- LM8UU bearings (Ø15mm=12px) -->
+<circle cx="327" cy="450" r="10" fill="#405070" stroke="#304060" stroke-width="1"/>
+<circle cx="373" cy="450" r="10" fill="#405070" stroke="#304060" stroke-width="1"/>
+<!-- M8 anti-backlash nut -->
+<rect x="344" y="440" width="12" height="22" rx="2" fill="#607090"/>
+<text x="350" y="487" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="white">CARRO</text>
+
+<!-- PIN Ø10mm × 120mm (94px) from carriage bottom (y=474) down to y=568 -->
+<rect x="346" y="474" width="8" height="94" rx="1" fill="#5868a0" stroke="#3848a0" stroke-width="1.5"/>
+<!-- Pin base disc Ø16mm-->
+<ellipse cx="350" cy="568" rx="9" ry="4" fill="#4858a0" stroke="#303860" stroke-width="1"/>
+
+<!-- WEIGHTS DOLZ on pin (stacked above pin base disc, sliding by C-slot)
+     200g: 10px; 500g: 14px; 1kg: 18px; 2kg: 22px = 64px total stack -->
+<rect x="335" y="546" width="30" height="10" rx="2" fill="#c8900a" stroke="#906600" stroke-width="1.5"/>  <!-- 200g bronce -->
+<rect x="333" y="530" width="34" height="14" rx="2" fill="#a07808" stroke="#806000" stroke-width="1.5"/>  <!-- 500g bronce -->
+<rect x="331" y="510" width="38" height="18" rx="2" fill="#585858" stroke="#333" stroke-width="1.5"/>      <!-- 1kg hierro -->
+<rect x="329" y="486" width="42" height="22" rx="2" fill="#383838" stroke="#111" stroke-width="1.5"/>      <!-- 2kg hierro -->
+
+<!-- C-slot indicator on largest weight -->
+<rect x="346" y="487" width="8" height="21" fill="#f0f0d0" opacity="0.4"/>
+
+<!-- RUBBER TIP at pin bottom -->
+<ellipse cx="350" cy="570" rx="12" ry="5" fill="#111" opacity="0.85"/>
+<text x="366" y="573" font-family="Arial,sans-serif" font-size="7" fill="#333">Goma NBR</text>
+
+<!-- BALANCE body + tray
+     Balance left: x=170 (clearance 23px from col inner), right x=530
+     Width 390mm=304px, bottom y=770, top y=770-126=644
+     BUT tray surface at y=770-126=644 → balance body height: y=644 to y=770 -->
+<rect x="173" y="644" width="354" height="126" rx="4" fill="#c0ccd8" stroke="#8090a8" stroke-width="1.5"/>
+<!-- Tray plate (inox) at y=644 -->
+<rect x="155" y="638" width="368" height="16" rx="3" fill="#d8e4ee" stroke="#8090a8" stroke-width="1.5"/>
+<text x="339" y="700" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#445566">CUORA NEO-2</text>
+<text x="339" y="714" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#667788">390 × 440 × 165 mm</text>
+<text x="339" y="648" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#99aaaa">Bandeja inox 240×365mm — centro sobre eje del portal</text>
+
+<!-- HOME limit switch at crossbeam bottom -->
+<rect x="147" y="360" width="18" height="12" rx="2" fill="#dd2222" stroke="#991111" stroke-width="1"/>
+<text x="145" y="360" text-anchor="end" font-family="Arial,sans-serif" font-size="7" fill="#cc1111">HOME sw</text>
+
+<!-- SAFETY limit switch (30mm above tray = 192mm from table = y=770-150=620) -->
+<rect x="147" y="615" width="18" height="12" rx="2" fill="#dd6600" stroke="#aa4400" stroke-width="1"/>
+<text x="145" y="620" text-anchor="end" font-family="Arial,sans-serif" font-size="7" fill="#cc4400">SAFETY sw</text>
+
+<!-- ════ COTAS ════ -->
+
+<!-- Portal outer width 520mm -->
+<line x1="147" y1="808" x2="531" y2="808" stroke="#444" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="339" y="805" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#222">520 mm (ancho exterior portal)</text>
+
+<!-- Column width 40mm (left) -->
+<line x1="147" y1="740" x2="178" y2="740" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="162" y="735" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#333">40mm</text>
+
+<!-- Clearance leg–balance (23mm approx) -->
+<line x1="178" y1="730" x2="201" y2="730" stroke="#0080cc" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="189" y="724" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#0060aa">25mm</text>
+
+<!-- Balance width 390mm -->
+<line x1="173" y1="820" x2="527" y2="820" stroke="#0080cc" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="350" y="835" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#0060aa">390 mm (balanza)</text>
+
+<!-- T_BANDEJA 162mm -->
+<line x1="60" y1="638" x2="60" y2="770" stroke="#cc4400" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="48" y="708" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#cc4400" transform="rotate(-90,48,708)">162 mm MEDIDA ↕</text>
+
+<!-- Crossbeam height 522mm -->
+<line x1="75" y1="363" x2="75" y2="770" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="63" y="570" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#333" transform="rotate(-90,63,570)">522 mm (travesaño)</text>
+
+<!-- Total frame height ~620mm -->
+<line x1="42" y1="265" x2="42" y2="770" stroke="#1a2d4a" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="30" y="520" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#1a2d4a" transform="rotate(-90,30,520)">~620 mm total</text>
+
+<!-- Travel 220mm -->
+<line x1="590" y1="474" x2="590" y2="302" stroke="#006600" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="608" y="390" font-family="Arial,sans-serif" font-size="8" fill="#006600">220mm</text>
+<text x="608" y="401" font-family="Arial,sans-serif" font-size="8" fill="#006600">viaje</text>
+
+<!-- Pin 120mm -->
+<line x1="614" y1="474" x2="614" y2="568" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="626" y="524" font-family="Arial,sans-serif" font-size="8" fill="#333">120mm</text>
+<text x="626" y="534" font-family="Arial,sans-serif" font-size="8" fill="#333">pin</text>
+
+<!-- Guide separation 60mm -->
+<line x1="327" y1="295" x2="373" y2="295" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="350" y="291" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#333">60mm</text>
+
+<!-- Lower tube height 280mm -->
+<line x1="618" y1="534" x2="618" y2="752" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="630" y="645" font-family="Arial,sans-serif" font-size="7" fill="#444">280mm</text>
+<text x="630" y="655" font-family="Arial,sans-serif" font-size="7" fill="#444">(fijo)</text>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PANEL DERECHO                                      -->
+<!-- ══════════════════════════════════════════════════ -->
+
+<!-- DETALLE TELESCÓPICO -->
+<text x="998" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1a2d4a" letter-spacing="1">DETALLE TELESCÓPICO + DIMENSIONES</text>
+
+<!-- Telescoping detail drawing (enlarged) -->
+<text x="760" y="100" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a2d4a">COLUMNA REGULABLE (detalle)</text>
+
+<!-- Outer tube 40×40×3mm -->
+<rect x="760" y="108" width="80" height="260" rx="2" fill="#7a90a8" stroke="#506080" stroke-width="2"/>
+<rect x="770" y="115" width="60" height="246" fill="#f4f6fa"/>
+
+<!-- Inner tube 30×30×2mm sliding inside -->
+<rect x="775" y="108" width="50" height="200" rx="1" fill="#9aafca" stroke="#708aaa" stroke-width="1.5"/>
+<rect x="781" y="114" width="38" height="188" fill="#f4f6fa" opacity="0.7"/>
+
+<!-- PTFE shim strips (2mm each side) -->
+<rect x="771" y="120" width="4" height="100" fill="#44aa44" opacity="0.6"/>
+<rect x="825" y="120" width="4" height="100" fill="#44aa44" opacity="0.6"/>
+<text x="840" y="155" font-family="Arial,sans-serif" font-size="7" fill="#226622">PTFE 2mm</text>
+<text x="840" y="165" font-family="Arial,sans-serif" font-size="7" fill="#226622">ambos lados</text>
+
+<!-- M6 lock bolts -->
+<circle cx="800" cy="290" r="7" fill="#cc4400" stroke="#992200" stroke-width="1.5"/>
+<circle cx="800" cy="318" r="7" fill="#cc4400" stroke="#992200" stroke-width="1.5"/>
+<text x="856" y="297" font-family="Arial,sans-serif" font-size="8" fill="#cc4400">2× M6 tornillo</text>
+<text x="856" y="307" font-family="Arial,sans-serif" font-size="8" fill="#cc4400">mariposa</text>
+<text x="856" y="317" font-family="Arial,sans-serif" font-size="8" fill="#cc4400">(llave manual)</text>
+<line x1="810" y1="290" x2="854" y2="294" stroke="#cc4400" stroke-width="0.8"/>
+<line x1="810" y1="318" x2="854" y2="314" stroke="#cc4400" stroke-width="0.8"/>
+
+<!-- Dimension arrows on detail -->
+<!-- Outer width 40mm -->
+<line x1="720" y1="108" x2="720" y2="368" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="708" y="240" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#333" transform="rotate(-90,708,240)">260mm escala aprox.</text>
+
+<line x1="757" y1="368" x2="843" y2="368" stroke="#555" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="800" y="382" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#333">40mm (tubo exterior)</text>
+
+<line x1="775" y1="390" x2="825" y2="390" stroke="#0060aa" stroke-width="1" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+<text x="800" y="403" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#0060aa">30mm (tubo interior)</text>
+
+<!-- Adjustment range note -->
+<rect x="714" y="415" width="220" height="65" rx="4" fill="#fffbe8" stroke="#ccaa00" stroke-width="1.2"/>
+<text x="724" y="429" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#886600">RANGO DE REGULACIÓN</text>
+<text x="724" y="444" font-family="Arial,sans-serif" font-size="8" fill="#664400">Mín: 380mm (tubos casi unidos)</text>
+<text x="724" y="458" font-family="Arial,sans-serif" font-size="8" fill="#664400">Máx: 560mm (120mm overlap)</text>
+<text x="724" y="472" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#1a5a1a">Trabajo T_B=162mm → 510mm ✓</text>
+
+<!-- DIMENSIONS TABLE -->
+<text x="960" y="100" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#1a2d4a">COTAS Y MATERIAL — LISTA COMPLETA</text>
+
+<!-- Table headers -->
+<rect x="714" y="498" width="540" height="16" rx="2" fill="#1a2d4a"/>
+<text x="720" y="510" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="white">Pieza</text>
+<text x="920" y="510" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="white">Dimensión / Spec</text>
+<text x="1100" y="510" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="white">Cantidad</text>
+<text x="1170" y="510" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="white">Nota</text>
+
+<!-- Table rows (alternating) -->
+<rect x="714" y="514" width="540" height="14" fill="#eef1f6"/>
+<text x="720" y="524" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#1a2d4a">ESTRUCTURA (herrero fabrica)</text>
+
+<rect x="714" y="528" width="540" height="13"/>
+<text x="724" y="538" font-family="Arial,sans-serif" font-size="8" fill="#333">Columna — tubo exterior</text>
+<text x="920" y="538" font-family="Arial,sans-serif" font-size="8" fill="#333">40×40×3mm S235 · 280mm largo</text>
+<text x="1110" y="538" font-family="Arial,sans-serif" font-size="8" fill="#333">2</text>
+<text x="1140" y="538" font-family="Arial,sans-serif" font-size="8" fill="#333">soldado a base</text>
+
+<rect x="714" y="541" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="551" font-family="Arial,sans-serif" font-size="8" fill="#333">Columna — tubo interior (telescópico)</text>
+<text x="920" y="551" font-family="Arial,sans-serif" font-size="8" fill="#333">30×30×2mm S235 · 350mm largo</text>
+<text x="1110" y="551" font-family="Arial,sans-serif" font-size="8" fill="#333">2</text>
+<text x="1140" y="551" font-family="Arial,sans-serif" font-size="8" fill="#333">desliza con guía PTFE</text>
+
+<rect x="714" y="554" width="540" height="13"/>
+<text x="724" y="564" font-family="Arial,sans-serif" font-size="8" fill="#333">Travesaño superior</text>
+<text x="920" y="564" font-family="Arial,sans-serif" font-size="8" fill="#333">50×50×3mm S235 · 520mm largo</text>
+<text x="1110" y="564" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="564" font-family="Arial,sans-serif" font-size="8" fill="#333">soldado a columnas</text>
+
+<rect x="714" y="567" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="577" font-family="Arial,sans-serif" font-size="8" fill="#333">Placa base</text>
+<text x="920" y="577" font-family="Arial,sans-serif" font-size="8" fill="#333">120×120×5mm chapa S235</text>
+<text x="1110" y="577" font-family="Arial,sans-serif" font-size="8" fill="#333">2</text>
+<text x="1140" y="577" font-family="Arial,sans-serif" font-size="8" fill="#333">4× agujeros M8 para pies</text>
+
+<rect x="714" y="580" width="540" height="13"/>
+<text x="724" y="590" font-family="Arial,sans-serif" font-size="8" fill="#333">Carro (carriage)</text>
+<text x="920" y="590" font-family="Arial,sans-serif" font-size="8" fill="#333">80×60×5mm chapa S235</text>
+<text x="1110" y="590" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="590" font-family="Arial,sans-serif" font-size="8" fill="#333">2× Ø15 H7 (LM8UU)</text>
+
+<rect x="714" y="593" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="603" font-family="Arial,sans-serif" font-size="8" fill="#333">Placa motor</text>
+<text x="920" y="603" font-family="Arial,sans-serif" font-size="8" fill="#333">60×60×4mm chapa S235</text>
+<text x="1110" y="603" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="603" font-family="Arial,sans-serif" font-size="8" fill="#333">4× agujeros M3 paso 31mm</text>
+
+<rect x="714" y="606" width="540" height="13"/>
+<text x="724" y="616" font-family="Arial,sans-serif" font-size="8" fill="#333">Pin</text>
+<text x="920" y="616" font-family="Arial,sans-serif" font-size="8" fill="#333">Ø10mm redondo S235 · 120mm largo · M10 en extremo superior</text>
+<text x="1110" y="616" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="616" font-family="Arial,sans-serif" font-size="8" fill="#cc2200" font-weight="bold">ver notas críticas</text>
+
+<rect x="714" y="619" width="540" height="14" fill="#e0e8f0"/>
+<text x="720" y="630" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#1a2d4a">HARDWARE (el usuario compra)</text>
+
+<rect x="714" y="633" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="643" font-family="Arial,sans-serif" font-size="8" fill="#333">Motor NEMA17 + driver</text>
+<text x="920" y="643" font-family="Arial,sans-serif" font-size="8" fill="#333">40Ncm · 1.8°/paso + DRV8825</text>
+<text x="1110" y="643" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="643" font-family="Arial,sans-serif" font-size="8" fill="#333">ya disponible</text>
+
+<rect x="714" y="646" width="540" height="13"/>
+<text x="724" y="656" font-family="Arial,sans-serif" font-size="8" fill="#333">Guías lineales</text>
+<text x="920" y="656" font-family="Arial,sans-serif" font-size="8" fill="#333">Ø8mm × 280mm acero templado</text>
+<text x="1110" y="656" font-family="Arial,sans-serif" font-size="8" fill="#333">2</text>
+<text x="1140" y="656" font-family="Arial,sans-serif" font-size="8" fill="#333">separación 60mm C-C</text>
+
+<rect x="714" y="659" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="669" font-family="Arial,sans-serif" font-size="8" fill="#333">Rodamientos lineales LM8UU</text>
+<text x="920" y="669" font-family="Arial,sans-serif" font-size="8" fill="#333">Ø8mm · 15×24mm</text>
+<text x="1110" y="669" font-family="Arial,sans-serif" font-size="8" fill="#333">2</text>
+<text x="1140" y="669" font-family="Arial,sans-serif" font-size="8" fill="#333">prensado en carro (H7)</text>
+
+<rect x="714" y="672" width="540" height="13"/>
+<text x="724" y="682" font-family="Arial,sans-serif" font-size="8" fill="#333">Varilla roscada M8 (husillo)</text>
+<text x="920" y="682" font-family="Arial,sans-serif" font-size="8" fill="#333">M8 paso 1.25mm · 350mm largo</text>
+<text x="1110" y="682" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="682" font-family="Arial,sans-serif" font-size="8" fill="#333">rosca standard (no trapezoidal)</text>
+
+<rect x="714" y="685" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="695" font-family="Arial,sans-serif" font-size="8" fill="#333">Rodamiento axial F688ZZ</text>
+<text x="920" y="695" font-family="Arial,sans-serif" font-size="8" fill="#333">8×16×5mm flangeado</text>
+<text x="1110" y="695" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="695" font-family="Arial,sans-serif" font-size="8" fill="#333">en travesaño, sujeta husillo</text>
+
+<rect x="714" y="698" width="540" height="13"/>
+<text x="724" y="708" font-family="Arial,sans-serif" font-size="8" fill="#333">Coupler flexible 5→8mm</text>
+<text x="920" y="708" font-family="Arial,sans-serif" font-size="8" fill="#333">Eje motor 5mm → husillo M8</text>
+<text x="1110" y="708" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="708" font-family="Arial,sans-serif" font-size="8" fill="#333">absorbe desalineación</text>
+
+<rect x="714" y="711" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="721" font-family="Arial,sans-serif" font-size="8" fill="#333">Microswitch con palanca</text>
+<text x="920" y="721" font-family="Arial,sans-serif" font-size="8" fill="#333">NO (normalmente abierto)</text>
+<text x="1110" y="721" font-family="Arial,sans-serif" font-size="8" fill="#333">2</text>
+<text x="1140" y="721" font-family="Arial,sans-serif" font-size="8" fill="#333">HOME + SAFETY</text>
+
+<rect x="714" y="724" width="540" height="13"/>
+<text x="724" y="734" font-family="Arial,sans-serif" font-size="8" fill="#333">Pies antivibración</text>
+<text x="920" y="734" font-family="Arial,sans-serif" font-size="8" fill="#333">Ø40×10mm NBR · espiga M8</text>
+<text x="1110" y="734" font-family="Arial,sans-serif" font-size="8" fill="#333">4</text>
+<text x="1140" y="734" font-family="Arial,sans-serif" font-size="8" fill="#333">aíslan vibración de la balanza</text>
+
+<rect x="714" y="737" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="747" font-family="Arial,sans-serif" font-size="8" fill="#333">Tornillos regulación columna</text>
+<text x="920" y="747" font-family="Arial,sans-serif" font-size="8" fill="#333">M6×40mm inox + tuerca mariposa</text>
+<text x="1110" y="747" font-family="Arial,sans-serif" font-size="8" fill="#333">4</text>
+<text x="1140" y="747" font-family="Arial,sans-serif" font-size="8" fill="#333">2 por columna, sin herramienta</text>
+
+<rect x="714" y="750" width="540" height="13"/>
+<text x="724" y="760" font-family="Arial,sans-serif" font-size="8" fill="#333">Goma punta de pin</text>
+<text x="920" y="760" font-family="Arial,sans-serif" font-size="8" fill="#333">NBR Ø20×5mm — pegada al disco</text>
+<text x="1110" y="760" font-family="Arial,sans-serif" font-size="8" fill="#333">1</text>
+<text x="1140" y="760" font-family="Arial,sans-serif" font-size="8" fill="#333">protege la bandeja inox</text>
+
+<rect x="714" y="763" width="540" height="13" fill="#eef1f6"/>
+<text x="724" y="773" font-family="Arial,sans-serif" font-size="8" fill="#333">Tiras PTFE (shim telescópico)</text>
+<text x="920" y="773" font-family="Arial,sans-serif" font-size="8" fill="#333">2mm × 6mm × 120mm</text>
+<text x="1110" y="773" font-family="Arial,sans-serif" font-size="8" fill="#333">4</text>
+<text x="1140" y="773" font-family="Arial,sans-serif" font-size="8" fill="#333">2 por columna, reducen holgura</text>
+
+<!-- NOTAS CRÍTICAS para el herrero -->
+<rect x="714" y="785" width="540" height="65" rx="4" fill="#fff8e8" stroke="#cc9900" stroke-width="1.5"/>
+<text x="722" y="798" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#885500">⚠ NOTAS CRÍTICAS PARA EL HERRERO</text>
+<text x="722" y="811" font-family="Arial,sans-serif" font-size="8" fill="#664400">1. Los 2 agujeros de guías Ø8mm en el carro deben estar a 60mm ±0.3mm — usar plantilla.</text>
+<text x="722" y="823" font-family="Arial,sans-serif" font-size="8" fill="#664400">2. El travesaño debe quedar perfectamente nivelado (verificar con nivel antes de soldar).</text>
+<text x="722" y="835" font-family="Arial,sans-serif" font-size="8" fill="#664400">3. Ranura C del pin: la luz debe ser ≥ 12mm para que pasen las pesas DOLZ Ø10mm + holgura.</text>
+<text x="722" y="847" font-family="Arial,sans-serif" font-size="8" fill="#664400">4. Acabado: lijar y pintar RAL 7035 gris claro (o elección del cliente). Las guías NO se pintan.</text>
+
+<!-- FOOTER -->
+<rect x="0" y="810" width="1280" height="50" fill="#1a2d4a"/>
+<text x="20" y="830" font-family="Arial,sans-serif" font-size="9" fill="#8aaad0">Portal regulable: 380–560mm altura columna · T_BANDEJA = 162mm → columna en 510mm · Viaje actuador: 220mm · Husillo M8 autobloqueante</text>
+<text x="20" y="847" font-family="Arial,sans-serif" font-size="8" fill="#5577aa">Carrera cálculo: HOME pin en 342mm (162+100pesas+80clearance) · CONTACT en 162mm · viaje efectivo 180mm &lt; 220mm disponibles ✓</text>
+<text x="1260" y="830" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#8aaad0">Suite HIL CUORA NEO-2 · Systel</text>
+<text x="1260" y="847" text-anchor="end" font-family="Arial,sans-serif" font-size="8" fill="#5577aa">Plano referencia — no apto para certificación estructural</text>
+</svg>

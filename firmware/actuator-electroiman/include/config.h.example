@@ -1,0 +1,60 @@
+#pragma once
+
+// ── WiFi ────────────────────────────────────────────────────
+#define WIFI_SSID  "YOUR_WIFI_SSID"
+#define WIFI_PASS  "YOUR_WIFI_PASSWORD"
+
+// ── Balance API (para detección de contacto) ────────────────
+#define NEO_IP       "192.168.X.X"
+#define NEO_API_PORT 7376
+
+// ── TCP Server (puerto que escucha comandos del PC de test) ──
+#define TCP_PORT 9999
+
+// ── Pines: ESP32-S3 DevKitC-1 N16R8 + DRV8825 ──────────────
+// GPIO19/20 reservados para USB OTG. GPIO43/44 para CP2102 UART.
+#define PIN_STEP       4
+#define PIN_DIR        5
+#define PIN_EN         6    // active LOW (DRV8825 EN)
+#define PIN_M0         7    // microstepping
+#define PIN_M1         8
+#define PIN_M2         9
+#define PIN_HOME_SW   10    // INPUT_PULLUP, active LOW — fin de carrera arriba
+#define PIN_SAFETY_SW 11    // INPUT_PULLUP, active LOW — fin de carrera abajo
+
+// ── Parámetros de movimiento (calibrar en Sprint 0) ─────────
+#define FAST_SPEED            500     // steps/sec — fase rápida
+#define CREEP_SPEED            80     // steps/sec — fase lenta (detección contacto)
+#define BACKLASH_STEPS         40     // sobrecarrera anti-backlash (~0.25mm tornillo M8)
+#define APPROACH_MARGIN_STEPS 300     // steps antes del punto de contacto esperado
+#define CONTACT_THRESHOLD_G    30.0f  // umbral de detección de contacto en gramos
+
+// PLACEHOLDER — calibrar en Sprint 0
+#define STEPS_PER_GRAM          5.0f
+
+// ── Electroimán ──────────────────────────────────────────────
+// Bobina 12V/20N controlada por IRLZ44N (logic-level, satura con 3.3V del ESP32).
+// Fuente externa: adaptador DC 12V/1A + diodo flyback 1N4007.
+#define PIN_MAGNET             12    // gate del IRLZ44N
+#define MAGNET_ON_MS          300    // espera tras energizar (campo establecido)
+#define MAGNET_OFF_MS         200    // espera tras soltar (campo residual disipado)
+
+// ── Rack de almacenamiento — alturas desde la mesa en mm ─────
+// Pesas de latón 500g: pegar arandela hierro M6 (Ø18mm) con epoxi en cara superior.
+// Convertir a steps en runtime: mm_to_steps(h) = h * (6400 / 1.25)
+#define SLOT_HEIGHT_MM_0      430.0f  // slot 0 → 2kg   (hierro)
+#define SLOT_HEIGHT_MM_1      390.0f  // slot 1 → 1kg   (hierro)
+#define SLOT_HEIGHT_MM_2      350.0f  // slot 2 → 500g  (latón + arandela M6)
+#define SLOT_HEIGHT_MM_3      310.0f  // slot 3 → 500g  (latón + arandela M6)
+#define NUM_SLOTS               4
+
+// Altura del pin en posición HOME respecto a la mesa.
+// CALIBRAR tras construir el portal — depende de la altura real del puente.
+#define HOME_HEIGHT_MM        560.0f
+
+// Altura de la superficie de la bandeja — medida física confirmada.
+#define T_BANDEJA_MM          162.0f
+
+// Distancia extra para despejar/enganchar el peg (calibrar en Sprint 0).
+#define PEG_CLEAR_MM            8.0f  // sube 8mm para despejar el peg
+#define PEG_ENGAGE_MM           4.0f  // baja 4mm extra al depositar en el peg

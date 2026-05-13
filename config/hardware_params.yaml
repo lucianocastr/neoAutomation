@@ -1,0 +1,82 @@
+# config/hardware_params.yaml
+# Ajustar tras Sprint 0 y cada sesión de calibración.
+# Versionado en git: el historial muestra cómo evolucionó la calibración.
+
+actuator:
+  backlash_margin_steps: 40       # sobrecarrera anti-backlash (ajustar en Sprint 0)
+  creep_speed_steps_per_s: 80     # fase lenta de aproximación al contacto
+  fast_speed_steps_per_s: 500     # fase rápida de descenso
+  contact_threshold_g: 30         # umbral de detección de contacto con bandeja
+  approach_margin_steps: 300      # margen previo al punto de contacto esperado
+
+stabilization:
+  # tolerance_g ELIMINADO — derivado dinámicamente por MetrologyProfile.tolerance_g_for()
+  stable_reads: 5                 # lecturas consecutivas estables requeridas
+  poll_interval_s: 0.2            # intervalo entre lecturas de /api/weight
+  max_wait_s: 8                   # tiempo máximo de espera — calibrar con Sprint 0
+
+ready_state:
+  max_weight_kg: 0.003            # peso máximo para considerar bandeja "libre"
+  pin_float_settle_s: 1.0         # espera post-zero() para el pin flotante
+
+calibration:
+  drift_tolerance_g: 20           # deriva máxima aceptable de tray_contact_steps (10× e1)
+  verification_weight_g: 200      # pesa usada para verificar calibración al inicio de sesión
+
+api:
+  timeout_s: 5                    # timeout para requests a la API REST
+
+metrology:
+  AR:
+    unit: kg
+    unit_to_kg: 1.0
+    ranges:
+      - capacity_native: 6.0
+        division_native: 0.002      # e1 = 2g
+      - capacity_native: 15.0
+        division_native: 0.005      # e2 = 5g
+      - capacity_native: 30.0
+        division_native: 0.010      # e3 = 10g
+    zero_limit_native: 0.900        # 3% de capacidad máxima
+    tare_limit_native: 6.000        # 100% rango 1
+    plu_tare_limit_native: 1.500    # 5% capacidad máxima
+    above_max_divisions: 0          # 0e de gracia → overload estricto
+    initial_zero_native: 3.000      # auto-zero al arranque (más permisivo en AR)
+    frozen_mode: false
+    drained_mode: true
+
+  BR:
+    unit: kg
+    unit_to_kg: 1.0
+    ranges:
+      - capacity_native: 6.0
+        division_native: 0.002
+      - capacity_native: 15.0
+        division_native: 0.005
+      - capacity_native: 30.0
+        division_native: 0.010
+    zero_limit_native: 0.900
+    tare_limit_native: 6.000
+    plu_tare_limit_native: 1.500
+    above_max_divisions: 9          # 9e de gracia = 0.090 kg (rango 6kg)
+    initial_zero_native: 1.000
+    frozen_mode: true
+    drained_mode: true
+
+  US:
+    unit: lb
+    unit_to_kg: 0.453592
+    ranges:
+      - capacity_native: 15.0
+        division_native: 0.005      # e1 = 5g (~2.3g equiv.)
+      - capacity_native: 30.0
+        division_native: 0.010
+      - capacity_native: 60.0
+        division_native: 0.020
+    zero_limit_native: 1.800        # 3% de 60 lb
+    tare_limit_native: 15.000
+    plu_tare_limit_native: 3.000
+    above_max_divisions: 9          # 9e de gracia = 0.180 lb (rango 15lb)
+    initial_zero_native: 1.000
+    frozen_mode: true
+    drained_mode: true

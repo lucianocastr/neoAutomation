@@ -1,0 +1,23 @@
+# ── Credenciales — copiar desde .example y completar ──────────
+**/config.h
+.env.test
+
+# ── PlatformIO ─────────────────────────────────────────────────
+**/.pio/
+
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# ── Reportes generados ─────────────────────────────────────────
+reports/
+
+# ── Config local de Claude Code ────────────────────────────────
+.claude/settings.local.json
+
+# ── OS ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
