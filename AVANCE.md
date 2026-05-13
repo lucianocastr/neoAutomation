@@ -16,9 +16,9 @@
 | **Stack HID end-to-end** | ✅ Validado | KEY_PRESS F4 → balanza ejecutó CERO (0.014→0.000 kg) |
 | **SVG puente portal** | ✅ Diseñado | `assets/puente-portal-actuador.svg` — T_BANDEJA=162mm, telescópico 380–560mm |
 | **Firmware actuador (pin)** | ✅ Listo para flashear | `firmware/actuator/` — SET_WEIGHT/HOME/ZERO, hardware no construido |
-| **Firmware actuador (electroimán)** | 🟡 Diseño paralelo | `firmware/actuator-electroiman/` — PICK/LIFT automático, pendiente hardware |
+| **Firmware actuador (electroimán)** | ❌ Descartado | `firmware/actuator-electroiman/` — diseño descartado, se usa pin NBR |
 | Tests de aplicación | ❌ No iniciado | Cypress (Fases 1-2), pytest (Fases 3-4) |
-| **Hardware físico (puente portal)** | ❌ No construido | SVG listo para herrero — pendiente actualizar SVG con rack de electroimán |
+| **Hardware físico (puente portal)** | ❌ No construido | SVG listo para herrero — sin rack (design B descartado) |
 | Sprint 0 — curva de estabilización | 🟡 Pendiente hardware | Construir portal primero |
 
 **Archivos creados y validados:**
