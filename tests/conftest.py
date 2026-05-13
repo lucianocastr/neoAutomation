@@ -41,15 +41,15 @@ def api(load_env) -> NEOApiClient:
 
 @pytest.fixture(scope="session")
 def actuator(load_env) -> ActuatorClient:
-    host = _require("NEO_ESP32_ACTUATOR_IP")
-    port = int(os.getenv("NEO_ESP32_ACTUATOR_PORT", "9999"))
+    host = _require("NEO_ESP32_IP")
+    port = int(os.getenv("NEO_ESP32_PORT", "9999"))
     return ActuatorClient(host=host, port=port)
 
 
 @pytest.fixture(scope="session")
 def hid(load_env) -> HIDClient:
-    host = _require("NEO_ESP32_HID_IP")
-    port = int(os.getenv("NEO_ESP32_HID_PORT", "9999"))
+    host = _require("NEO_ESP32_IP")
+    port = int(os.getenv("NEO_ESP32_PORT", "9999"))
     return HIDClient(host=host, port=port)
 
 
