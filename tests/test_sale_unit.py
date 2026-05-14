@@ -4,11 +4,16 @@ Tests de venta automatizada — producto tipo unit (Suite G).
 No requieren portal físico. Requieren ESP32 conectado.
 
 Compatibles con ambos modos de la balanza:
-  - tipopapel=ticket:              ENTER×3 → invoice en BD (siempre)
-  - tipopapel=label/clabel:        ENTER×1 → invoice en BD (solo si saveinvoice=1)
+  - tipopapel=ticket:    dígitos + ENTER×3 → invoice en BD (siempre)
+  - tipopapel=label:     dígitos + ENTER×2 → invoice en BD (solo si saveinvoice=1)
+                         ENTER 1 = carga el PLU en pantalla
+                         ENTER 2 = imprime etiqueta + crea invoice
 
 El número de ENTERs se determina automáticamente en runtime según el modo activo.
 Si saveinvoice=0 en modo etiqueta, los tests se saltan automáticamente.
+
+IMPORTANTE: usar dígitos HID para seleccionar PLU (NO api.load_plu()).
+api.load_plu() no activa el estado de entrada de PLU en la UI Java.
 
 Ejecutar:
     pytest tests/test_sale_unit.py -v -m esp32
@@ -104,18 +109,18 @@ def _poll_new_invoice(db, count_before: int, timeout_s: int = 25):
 
 @pytest.mark.esp32
 class TestUnitSaleCycle:
-    def test_sale_creates_new_invoice(self, api, hid, db, enter_count):
+    def test_sale_creates_new_invoice(self, hid, db, enter_count):
         """Venta de producto unit genera exactamente un invoice nuevo en BD."""
         count_before = db.invoice_count()
         _select_plu(hid, PLU_UNIT_SALE)
         _complete_sale(hid, enter_count)
         sale = _poll_new_invoice(db, count_before)
         assert sale is not None, (
-            f"No apareció invoice nuevo en 8 s (count_before={count_before}, "
+            f"No apareció invoice nuevo en 25 s (count_before={count_before}, "
             f"modo={db.get_print_mode()}, enters={enter_count})"
         )
 
-    def test_sale_invoice_references_correct_plu(self, api, hid, db, enter_count):
+    def test_sale_invoice_references_correct_plu(self, hid, db, enter_count):
         """El invoice creado referencia el PLU vendido."""
         count_before = db.invoice_count()
         _select_plu(hid, PLU_UNIT_SALE)
@@ -126,7 +131,7 @@ class TestUnitSaleCycle:
             f"product_id={sale['product_id']}, esperado {PLU_UNIT_SALE}"
         )
 
-    def test_sale_line_total_matches_price(self, api, hid, db, enter_count):
+    def test_sale_line_total_matches_price(self, hid, db, enter_count):
         """El total del invoice coincide con el precio configurado en Lista 1."""
         count_before = db.invoice_count()
         _select_plu(hid, PLU_UNIT_SALE)
@@ -137,7 +142,7 @@ class TestUnitSaleCycle:
             f"line_total={sale['line_total']}, esperado {PRICE_UNIT}"
         )
 
-    def test_sale_qty_is_one_unit(self, api, hid, db, enter_count):
+    def test_sale_qty_is_one_unit(self, hid, db, enter_count):
         """Producto unit registra qty=1 en la línea del invoice."""
         count_before = db.invoice_count()
         _select_plu(hid, PLU_UNIT_SALE)
@@ -148,7 +153,7 @@ class TestUnitSaleCycle:
             f"qty_kg={sale['qty_kg']}, esperado 1.0 para producto unit"
         )
 
-    def test_two_consecutive_sales_each_create_one_invoice(self, api, hid, db, enter_count):
+    def test_two_consecutive_sales_each_create_one_invoice(self, hid, db, enter_count):
         """Dos ventas consecutivas crean exactamente dos invoices."""
         count_before = db.invoice_count()
 
