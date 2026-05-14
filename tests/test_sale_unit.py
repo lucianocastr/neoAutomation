@@ -26,18 +26,7 @@ PRICE_UNIT    = 150.0   # precio base Lista 1
 # ── warmup ────────────────────────────────────────────────────────────────────
 
 @pytest.fixture(scope="module", autouse=True)
-def require_ticket_mode(db):
-    """Falla con mensaje claro si la balanza está en modo etiqueta."""
-    mode = db.get_print_mode()
-    if mode != "ticket":
-        pytest.skip(
-            f"Balanza en modo '{mode}' — tests de venta requieren modo 'ticket'.\n"
-            f"Cambiar desde Menú → Configuración → Tipo de papel → ticket."
-        )
-
-
-@pytest.fixture(scope="module", autouse=True)
-def setup_plu(api, creds, require_ticket_mode):
+def setup_plu(api, creds):
     """Crea el PLU unit con precio fijo antes de cualquier test del módulo."""
     api.create_plu({
         **creds,

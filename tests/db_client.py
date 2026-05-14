@@ -120,10 +120,13 @@ class BalanzaDB:
             "value_dbl": float(row[3]) if row[3] not in (None, "") else None,
         }
 
-    def get_print_mode(self) -> str:
-        """Retorna el modo de impresión activo: 'ticket', 'clabel', 'label' o 'none'."""
-        p = self.get_setup_param("tipopapel")
-        return p["value_str"] if p else "unknown"
+    def saves_invoices(self) -> bool:
+        """True si la balanza está configurada para guardar ventas en invoice.
+        saveinvoice.value_int=1 → guarda; 0 → NO guarda (modo etiqueta sin registro).
+        Nota: el modo ticket/etiqueta NO vive en public.setup — es estado en memoria
+        de la aplicación. Este flag solo refleja la configuración de guardado."""
+        p = self.get_setup_param("saveinvoice")
+        return bool(p and p["value_int"] == 1) if p else False
 
     def active_products(self) -> list[dict]:
         """Lista de productos activos con precio."""
