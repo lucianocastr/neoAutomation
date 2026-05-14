@@ -1,5 +1,5 @@
 # CUORA NEO — Estado del proyecto
-### Suite de automatización de pruebas · Actualizado: 2026-05-14 (sesión 4)
+### Suite de automatización de pruebas · Actualizado: 2026-05-14 (sesión 5)
 
 ---
 
@@ -136,15 +136,30 @@ PC → TCP 192.168.100.202:9999 → ESP32 → USB HID → Balanza 192.168.100.12
 - **Key:** `~/.ssh/cuora_neo` (ya instalada en la balanza)
 - **Comando:** `ssh -i ~/.ssh/cuora_neo root@192.168.100.123`
 
-### Flujo de venta CUORA NEO — confirmado 2026-05-13
+### Flujo de venta CUORA NEO — confirmado 2026-05-13/14
 
+**Modo ticket** (tipopapel=ticket):
 ```
-1. Seleccionar PLU (touchscreen o teclado → número → F3)
-2. Colocar peso en bandeja (esperar ESTABLE)
-3. ENTER → agrega ítem al ticket (pueden agregarse varios productos)
-4. ENTER → abre pantalla de resumen del ticket
-5. ENTER → imprime ticket y cierra → crea invoice en BD
+1. Tipear número PLU vía HID (400ms entre dígitos)
+2. ENTER → agrega ítem al ticket (pueden agregarse varios productos)
+3. ENTER → abre pantalla de resumen del ticket
+4. ENTER → imprime ticket y cierra → crea invoice en BD
 ```
+
+**Modo etiqueta** (tipopapel=label/clabel):
+```
+1. Tipear número PLU vía HID (400ms entre dígitos)
+2. ENTER → CARGA el producto (muestra nombre y precio en pantalla)
+3. ENTER → imprime etiqueta + crea invoice en BD (solo si saveinvoice=1)
+```
+
+**Reglas clave de ventas automatizadas (verificadas empíricamente 2026-05-14):**
+- `api.load_plu()` precarga datos en pantalla pero NO activa el estado de "entrada PLU" de la UI — el ENTER posterior es ignorado. **Usar siempre dígitos HID.**
+- NO enviar ESC antes de los dígitos — saca a la balanza del home screen.
+- `saveinvoice` solo puede activarse desde la UI de la balanza. Cambio por SQL no surte efecto (la app Java tiene el valor cacheado en memoria).
+- Latencia invoice → DB: 1–15s post-ENTER-final (variación normal).
+- `enter_count=2` para label/clabel, `enter_count=3` para ticket.
+- `inter_test_recovery=15s` necesario entre tests consecutivos para evitar contaminación de `count_before`.
 
 **BD:** `public.invoice` + `public.invoiceline` — confirmado con PLU 57, 0.200 kg, $6.98.
 **Credenciales BD:** `systel / Systel#4316` vía SSH root@192.168.100.123 → psql.
@@ -187,6 +202,7 @@ En el segundo intento (o tras ~30s de conexión estable) funciona correctamente.
 | ~~Tests de autenticación / roles~~ | `test_auth.py` | ✅ 11 passed + 4 skip vendor 2026-05-14 |
 | ~~Tests de encoding UTF-8~~ | `test_encoding.py` | ✅ 13/13 tests 2026-05-14 |
 | ~~Tests de integridad API↔DB~~ | `test_integrity.py` | ✅ 20/20 tests 2026-05-14 |
+| ~~Tests de venta automatizada unit (Suite G)~~ | `test_sale_unit.py` | ✅ 6/6 tests 2026-05-14 |
 | ~~Prueba tara + producto~~ | `prueba_manual.py` | ✅ hecho |
 | ~~Prueba venta + ticket en BD~~ | `prueba_manual_venta.py` | ✅ hecho |
 | ~~Flashear firmware ESP32~~ | — | ✅ hecho |
