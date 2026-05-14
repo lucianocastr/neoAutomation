@@ -20,6 +20,7 @@
 | **Firmware actuador (electroimán)** | ❌ Descartado | `firmware/actuator-electroiman/` — diseño descartado 2026-05-13 |
 | **Clientes Python + test prototipo** | ✅ Validado con hardware | `test_tare_product.py` corregido — F2 cancela tara, no F4 |
 | **Prueba manual guiada** | ✅ Validado 2026-05-13 | `scripts/prueba_manual.py` — tara+producto con pesas físicas, 4/4 fases OK |
+| **Prueba manual venta** | ✅ Validado 2026-05-13 | `scripts/prueba_manual_venta.py` — PLU+peso+ticket, invoice en BD verificada |
 | Tests de aplicación | ❌ No iniciado | Cypress (Fases 1-2), pytest SSH/VNC (Fases 3-4) |
 | **Hardware físico (puente portal)** | ❌ No construido | SVG listo — solo bloquea tests de pesaje automatizado |
 | Sprint 0 — curva de estabilización | 🟡 Pendiente hardware | Ejecutar tras construir portal |
@@ -37,6 +38,9 @@ tests/poll_utils.py                           ← poll_until_stable() (§6.5) �
 tests/conftest.py                             ← fixtures pytest: api/actuator/hid/profile ← NUEVO
 tests/test_tare_product.py                    ← prototipo: tara + peso producto — F2 cancela tara (corregido)
 scripts/prueba_manual.py                      ← guía interactiva: misma lógica, pesas a mano ← NUEVO
+scripts/prueba_manual_venta.py                ← guía venta: PLU + peso + ENTER×3 + verifica BD ← NUEVO
+tests/db_client.py                            ← BalanzaDB: queries SSH→psql a PostgreSQL ← NUEVO
+tests/hid_client.py                           ← agregado hid.enter() para confirmar venta
 requirements.txt                              ← dependencias Python del proyecto ← NUEVO
 config/hardware_params.yaml                   ← parámetros físicos + metrología AR/BR/US (§16 + §22.3)
 .env.test.example                             ← plantilla — NEO_ESP32_IP único (un solo ESP32)
@@ -131,6 +135,20 @@ PC → TCP 192.168.100.202:9999 → ESP32 → USB HID → Balanza 192.168.100.12
 - **Usuario:** `root` (no `systel`)
 - **Key:** `~/.ssh/cuora_neo` (ya instalada en la balanza)
 - **Comando:** `ssh -i ~/.ssh/cuora_neo root@192.168.100.123`
+
+### Flujo de venta CUORA NEO — confirmado 2026-05-13
+
+```
+1. Seleccionar PLU (touchscreen o teclado → número → F3)
+2. Colocar peso en bandeja (esperar ESTABLE)
+3. ENTER → agrega ítem al ticket (pueden agregarse varios productos)
+4. ENTER → abre pantalla de resumen del ticket
+5. ENTER → imprime ticket y cierra → crea invoice en BD
+```
+
+**BD:** `public.invoice` + `public.invoiceline` — confirmado con PLU 57, 0.200 kg, $6.98.
+**Credenciales BD:** `systel / Systel#4316` vía SSH root@192.168.100.123 → psql.
+**DB client:** `tests/db_client.py` → `BalanzaDB.latest_sale()`, `invoice_count()`.
 
 ### Comportamiento de TARA/CERO — confirmado 2026-05-13
 

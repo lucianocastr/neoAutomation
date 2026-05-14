@@ -26,8 +26,12 @@ class HIDClient:
         self._send({"cmd": "KEY_PRESS", "key": "F4"})
 
     def ok(self) -> None:
-        """F3 — confirma / tecla PLU."""
+        """F3 — carga PLU / tecla OK."""
         self._send({"cmd": "KEY_PRESS", "key": "F3"})
+
+    def enter(self) -> None:
+        """ENTER — confirma venta."""
+        self._send({"cmd": "KEY_PRESS", "key": "ENTER"})
 
     def menu(self) -> None:
         """F10 — abre menú."""
