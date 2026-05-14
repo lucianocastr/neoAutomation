@@ -187,7 +187,7 @@ En el segundo intento (o tras ~30s de conexión estable) funciona correctamente.
 | ~~Prueba tara + producto~~ | `prueba_manual.py` | ✅ hecho |
 | ~~Prueba venta + ticket en BD~~ | `prueba_manual_venta.py` | ✅ hecho |
 | ~~Flashear firmware ESP32~~ | — | ✅ hecho |
-| Prueba impresión de etiquetas | `prueba_manual_etiqueta.py` (a crear) | ninguno |
+| ~~Prueba impresión de etiquetas~~ | `prueba_manual_etiqueta.py` | ✅ hecho |
 
 ### CON PORTAL (bloqueante para pesaje automatizado)
 
