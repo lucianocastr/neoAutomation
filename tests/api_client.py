@@ -58,6 +58,9 @@ class NEOApiClient:
     def get_setup(self) -> dict:
         return self._get("/api/setup")
 
+    def create_advertising(self, data: dict) -> dict:
+        return self._post("/api/advertising", data)
+
     # ── Evidencia ──────────────────────────────────────────────
 
     def dump_timeline(self) -> List[dict]:

@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from tests.api_client import NEOApiClient
 from tests.actuator_client import ActuatorClient
 from tests.hid_client import HIDClient
+from tests.db_client import BalanzaDB
 from tests.metrology import build_profile
 
 
@@ -51,6 +52,21 @@ def hid(load_env) -> HIDClient:
     host = _require("NEO_ESP32_IP")
     port = int(os.getenv("NEO_ESP32_PORT", "9999"))
     return HIDClient(host=host, port=port)
+
+
+@pytest.fixture(scope="session")
+def db(load_env) -> BalanzaDB:
+    return BalanzaDB()
+
+
+@pytest.fixture(scope="session")
+def vendor_creds(load_env) -> dict:
+    """Credenciales de vendedor. Tests que usan este fixture se saltan si no están configuradas."""
+    user = os.getenv("NEO_VENDOR_USER", "")
+    pw   = os.getenv("NEO_VENDOR_PASS", "")
+    if not user or not pw:
+        pytest.skip("NEO_VENDOR_USER / NEO_VENDOR_PASS no configuradas — skip vendor tests")
+    return {"username": user, "password": pw}
 
 
 @pytest.fixture(scope="session")

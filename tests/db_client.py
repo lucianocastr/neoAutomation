@@ -60,12 +60,39 @@ class BalanzaDB:
         }
 
     def product_price(self, product_id: int) -> Optional[float]:
-        """Precio estándar del producto en la lista de precios activa."""
+        """Precio de Lista 1 desde productprice (columna 'pricelist', version 'lst1')."""
         row = self._one(
-            f"SELECT pricestd FROM public.productprice "
-            f"WHERE product_id={product_id} AND isactive='Y' LIMIT 1"
+            f"SELECT pricelist FROM public.productprice "
+            f"WHERE product_id={product_id} "
+            f"AND pricelist_version_id='lst1' AND isactive='Y' "
+            f"LIMIT 1"
         )
         return float(row[0]) if row else None
+
+    def product_detail(self, plu_id: int) -> Optional[dict]:
+        """Campos clave del producto directo desde PostgreSQL — para tests de integridad."""
+        row = self._one(
+            f"SELECT name, uom_id, extra_field2, preservation_info, "
+            f"ingredients, extra_field1, upc, isactive "
+            f"FROM public.product WHERE product_id={plu_id}"
+        )
+        if not row:
+            return None
+        keys = ["name", "uom_id", "extra_field2", "preservation_info",
+                "ingredients", "extra_field1", "upc", "isactive"]
+        return dict(zip(keys, row))
+
+    def advertising_detail(self, name: str) -> Optional[dict]:
+        """Fila de advertising por nombre — para tests de integridad."""
+        safe = name.replace("'", "''")
+        row = self._one(
+            f"SELECT name, advertising, isactive "
+            f"FROM public.advertising WHERE name='{safe}' "
+            f"ORDER BY created DESC LIMIT 1"
+        )
+        if not row:
+            return None
+        return {"name": row[0], "text": row[1], "isactive": row[2]}
 
     def active_products(self) -> list[dict]:
         """Lista de productos activos con precio."""

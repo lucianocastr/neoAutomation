@@ -1,5 +1,5 @@
 # CUORA NEO — Estado del proyecto
-### Suite de automatización de pruebas · Actualizado: 2026-05-13 (sesión 3)
+### Suite de automatización de pruebas · Actualizado: 2026-05-14 (sesión 4)
 
 ---
 
@@ -182,8 +182,11 @@ En el segundo intento (o tras ~30s de conexión estable) funciona correctamente.
 
 | Tarea | Script / herramienta | Prerequisito |
 |---|---|---|
-| Tests de API pura (ping, weight, signature) | `pytest` / Cypress | ninguno |
-| ABM de PLUs via API | `pytest tests/test_plu_*.py` | ninguno |
+| ~~Tests de API pura (ping, weight, signature)~~ | `test_api_connectivity.py` | ✅ 11/11 tests 2026-05-14 |
+| ~~ABM de PLUs via API~~ | `test_plu_abm.py` | ✅ 19 passed + 1 xpassed 2026-05-14 |
+| ~~Tests de autenticación / roles~~ | `test_auth.py` | ✅ 11 passed + 4 skip vendor 2026-05-14 |
+| ~~Tests de encoding UTF-8~~ | `test_encoding.py` | ✅ 13/13 tests 2026-05-14 |
+| ~~Tests de integridad API↔DB~~ | `test_integrity.py` | ✅ 20/20 tests 2026-05-14 |
 | ~~Prueba tara + producto~~ | `prueba_manual.py` | ✅ hecho |
 | ~~Prueba venta + ticket en BD~~ | `prueba_manual_venta.py` | ✅ hecho |
 | ~~Flashear firmware ESP32~~ | — | ✅ hecho |
@@ -250,7 +253,7 @@ cp .env.test.example .env.test
 ## Módulos de código (estado)
 
 ```
-✅ Creados (2026-05-08 al 2026-05-13):
+✅ Creados (2026-05-08 al 2026-05-14):
   tests/__init__.py
   tests/errors.py
   tests/api_client.py                              ← fix: coma decimal en weight, ping string
@@ -259,8 +262,16 @@ cp .env.test.example .env.test
   tests/actuator_client.py                         ← TCP client para ESP32 actuador
   tests/hid_client.py                              ← TCP client para ESP32 HID
   tests/poll_utils.py                              ← poll_until_stable() (§6.5)
-  tests/conftest.py                                ← fixtures pytest: api/actuator/hid/profile
-  tests/test_tare_product.py                       ← prototipo tara+producto (13 pasos)
+  tests/db_client.py                              ← BalanzaDB: queries SSH→psql a PostgreSQL
+  tests/conftest.py                                ← fixtures: api/actuator/hid/profile/db/creds
+  tests/test_tare_product.py                       ← prototipo tara+producto (requiere portal)
+  tests/test_api_connectivity.py                  ← 11 tests API pura: ping/weight/signature
+  tests/test_plu_abm.py                           ← 20 tests create/load/price/delete PLU
+  tests/test_auth.py                              ← 15 tests auth D1-D5 (roles, 401, 403)
+  tests/test_encoding.py                          ← 13 tests UTF-8: ñ tildes ° ASCII límite
+  tests/test_integrity.py                         ← 20 tests integridad API↔DB (campos, precios, advertising)
+  pytest.ini                                      ← markers: portal, esp32
+  scripts/prueba_manual_etiqueta.py               ← guía etiqueta: PLU+peso+ENTER directo
   config/hardware_params.yaml
   .env.test.example                               ← NEO_ESP32_IP único (un solo ESP32)
   assets/puente-portal-actuador.svg               ← plano portal T_BANDEJA=162mm
