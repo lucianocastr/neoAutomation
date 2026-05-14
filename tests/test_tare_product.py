@@ -24,6 +24,8 @@ TARE_G    = 500    # fuerza que simula el envase vacío (gramos)
 PRODUCT_G = 1000   # fuerza que simula el producto (gramos)
 
 
+@pytest.mark.portal
+@pytest.mark.esp32
 def test_tare_and_product_weight(
     actuator: ActuatorClient,
     api: NEOApiClient,
