@@ -121,19 +121,30 @@ class BalanzaDB:
         }
 
     def get_print_mode(self) -> str:
-        """Modo de impresión/venta activo según tipopapel:
-          'ticket'  → modo ticket — crea invoice en public.invoice
-          'label'   → etiqueta — NO crea invoice (confirmado empíricamente)
-          'clabel'  → etiqueta continua — NO crea invoice (confirmado empíricamente)
-          'none'    → sin impresión
-        Nota: saveinvoice.value_int NO afecta la creación de invoices en ningún modo
-        (verificado con saveinvoice=0 y saveinvoice=1 en label/clabel)."""
+        """Modo activo según tipopapel: 'ticket' | 'label' | 'clabel' | 'none'.
+          ticket → siempre crea invoice en BD.
+          label/clabel → crea invoice solo si saveinvoice.value_int=1.
+          none → sin impresión."""
         p = self.get_setup_param("tipopapel")
         return p["value_str"] if p and p["value_str"] else "unknown"
 
     def is_ticket_mode(self) -> bool:
-        """True si la balanza está en modo ticket (crea invoices en BD)."""
+        """True si tipopapel='ticket' (invoices siempre creados)."""
         return self.get_print_mode() == "ticket"
+
+    def saves_invoices(self) -> bool:
+        """True si la configuración actual persiste ventas en public.invoice.
+        Reglas empíricas (verificadas 2026-05-14):
+          - tipopapel=ticket:          siempre guarda (saveinvoice ignorado)
+          - tipopapel=label/clabel + saveinvoice=1: guarda
+          - tipopapel=label/clabel + saveinvoice=0: NO guarda
+        Nota: cambiar saveinvoice vía SQL directo puede no surtir efecto
+        si la app Java tiene el valor cacheado — cambiarlo desde la UI de la balanza."""
+        mode = self.get_print_mode()
+        if mode == "ticket":
+            return True
+        p = self.get_setup_param("saveinvoice")
+        return bool(p and p["value_int"] == 1)
 
     def active_products(self) -> list[dict]:
         """Lista de productos activos con precio."""
