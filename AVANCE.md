@@ -178,63 +178,43 @@ En el segundo intento (o tras ~30s de conexión estable) funciona correctamente.
 
 ## Lo próximo a hacer (en orden)
 
-### 1. Construir el portal físico (BLOQUEANTE CRÍTICO)
+### SIN PORTAL — disponible ahora
 
-**Decisión tomada:** firmware pin NBR + HID unificados en `firmware/esp32/`. SVG no requiere cambios (diseño B descartado).
+| Tarea | Script / herramienta | Prerequisito |
+|---|---|---|
+| Tests de API pura (ping, weight, signature) | `pytest` / Cypress | ninguno |
+| ABM de PLUs via API | `pytest tests/test_plu_*.py` | ninguno |
+| ~~Prueba tara + producto~~ | `prueba_manual.py` | ✅ hecho |
+| ~~Prueba venta + ticket en BD~~ | `prueba_manual_venta.py` | ✅ hecho |
+| ~~Flashear firmware ESP32~~ | — | ✅ hecho |
+| Prueba impresión de etiquetas | `prueba_manual_etiqueta.py` (a crear) | ninguno |
 
-Enviar `assets/puente-portal-actuador.svg` al herrero para fabricar:
-- Puente portal telescópico 380–560mm (acero 40×40×3mm + 30×30×2mm)
-- Carro con guías Ø8mm, husillo M8 paso 1.25mm
-- Motor NEMA17 + driver DRV8825
-- Fin de carrera HOME (arriba) + SAFETY (abajo)
-- Ver lista de materiales en **§5** y **§11** del plan
+### CON PORTAL (bloqueante para pesaje automatizado)
 
-### 2. ~~Flashear firmware/esp32/~~ ✅ COMPLETADO 2026-05-13
+1. **Construir portal físico** — enviar `assets/puente-portal-actuador.svg` al herrero
+   - Puente telescópico 380–560mm, carro Ø8mm, husillo M8, NEMA17 + DRV8825
+   - Ver lista de materiales en §5 y §11 del plan
 
-Firmware unificado flasheado, validado y funcionando. Ver sección Hallazgos.
+2. **Sprint 0 — curva de estabilización** (1–2 días con hardware)
+   ```bash
+   python scripts/sprint0_estabilizacion.py
+   # → calibra max_wait_s y stable_reads en config/hardware_params.yaml
+   ```
 
-### 3. Sprint 0 — curva de estabilización (1–2 días con hardware)
+3. **pytest completo con hardware**
+   ```bash
+   pytest tests/test_tare_product.py -v
+   ```
 
-Ejecutar `scripts/sprint0_estabilizacion.py` para medir cuánto tarda el sensor
-en estabilizarse. **Sin este dato, `max_wait_s` en `poll_until_stable()` es una adivinanza.**
+### Completar `.env.test` (copiar de `.env.test.example`)
 
-```bash
-python scripts/sprint0_estabilizacion.py
-# → genera estabilizacion.csv
-# → medir: ¿en cuántos segundos la variación cae < ±1g?
-# → ese valor define max_wait_s y stable_reads en config/hardware_params.yaml
-```
-
-Checklist completo: ver **§4 Fase 0** del plan.
-
-### 4. Completar `.env.test`
-
+Todo confirmado — copiar y usar directamente:
 ```bash
 cp .env.test.example .env.test
-# Completar:
-#   NEO_ESP32_IP=192.168.100.202   ← IP del ESP32-S3 unificado
-#   NEO_SSH_USER, NEO_SSH_PASS o KEY_PATH
-#   NEO_DB_NAME, NEO_DB_USER, NEO_DB_PASS
+# SSH: root@192.168.100.123, key ~/.ssh/cuora_neo
+# DB: systel / Systel#4316
+# ESP32: 192.168.100.202:9999
 ```
-
-Verificaciones pendientes (requieren credenciales):
-```bash
-ssh systel@192.168.100.123 uptime    # confirmar usuario SSH
-# VNC: vncviewer 192.168.100.123:5900
-```
-
-Primer test con hardware completo:
-```bash
-pytest tests/test_tare_product.py -v
-```
-
-### 5. Fase 1 — Cypress API (1 semana, independiente del portal)
-
-Prerequisito: Sprint 0 ejecutado + `.env.test` completo.
-
-Primer test: `cypress/e2e/api/connectivity.cy.js`
-- `GET /api/ping` → respuesta `"pong"` (string, no dict) en < 200ms
-- `GET /api/weight` → valor numérico con coma decimal, parseable
 
 ---
 
