@@ -9,6 +9,16 @@ from pathlib import Path
 from typing import Optional
 
 
+def _require_env(var: str) -> str:
+    val = os.getenv(var)
+    if not val:
+        raise RuntimeError(
+            f"Variable de entorno requerida no definida: {var}\n"
+            f"Copiar .env.test.example a .env.test y completar los valores."
+        )
+    return val
+
+
 class BalanzaDB:
     def __init__(
         self,
@@ -19,12 +29,12 @@ class BalanzaDB:
         db_pass:  str = None,
         db_name:  str = "cuora",
     ):
-        self._host    = ssh_host or os.getenv("NEO_SSH_HOST", "192.168.100.123")
+        self._host    = ssh_host or _require_env("NEO_SSH_HOST")
         self._user    = ssh_user
         self._key     = ssh_key  or os.getenv("NEO_SSH_KEY_PATH",
                                                str(Path.home() / ".ssh" / "cuora_neo"))
         self._db_user = db_user
-        self._db_pass = db_pass or os.getenv("NEO_DB_PASS", "Systel#4316")
+        self._db_pass = db_pass or _require_env("NEO_DB_PASS")
         self._db_name = db_name
 
     # ── Queries tipadas ──────────────────────────────────────────
@@ -93,6 +103,27 @@ class BalanzaDB:
         if not row:
             return None
         return {"name": row[0], "text": row[1], "isactive": row[2]}
+
+    def get_setup_param(self, param_id: str) -> Optional[dict]:
+        """Valor de un parámetro de public.setup por su id."""
+        safe = param_id.replace("'", "''")
+        row = self._one(
+            f"SELECT param, value_int, value_string, value_double "
+            f"FROM public.setup WHERE id='{safe}'"
+        )
+        if not row:
+            return None
+        return {
+            "param":    row[0],
+            "value_int": int(row[1]) if row[1] not in (None, "") else None,
+            "value_str": row[2],
+            "value_dbl": float(row[3]) if row[3] not in (None, "") else None,
+        }
+
+    def get_print_mode(self) -> str:
+        """Retorna el modo de impresión activo: 'ticket', 'clabel', 'label' o 'none'."""
+        p = self.get_setup_param("tipopapel")
+        return p["value_str"] if p else "unknown"
 
     def active_products(self) -> list[dict]:
         """Lista de productos activos con precio."""
