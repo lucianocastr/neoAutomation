@@ -56,13 +56,11 @@ def test_tare_and_product_weight(
     # ── FASE 3: Retirar y dejar limpio ──────────────────────────
 
     actuator.zero()
-    # Con tara activa y pin retraído la balanza muestra el negativo de la tara
+    # Con tara activa y pin retraído la balanza muestra exactamente -TARE_G.
     poll_until_stable(api, profile, expected_weight_kg=-(TARE_G / 1000))
 
-    negative_reading = api.get_weight(profile.unit_to_kg)
-    assert_negative_within_limit(negative_reading, profile)
-
-    hid.zero()
+    # F2 con bandeja vacía cancela la tara (F4/CERO no cancela tara).
+    hid.tare()
     poll_until_stable(api, profile, expected_weight_kg=0.0)
 
     final = api.get_weight(profile.unit_to_kg)

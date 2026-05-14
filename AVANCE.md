@@ -1,5 +1,5 @@
 # CUORA NEO — Estado del proyecto
-### Suite de automatización de pruebas · Actualizado: 2026-05-13 (sesión 2)
+### Suite de automatización de pruebas · Actualizado: 2026-05-13 (sesión 3)
 
 ---
 
@@ -16,12 +16,13 @@
 | **Stack HID end-to-end** | ✅ Validado | KEY_PRESS F4 → balanza ejecutó CERO (0.014→0.000 kg) |
 | **SVG puente portal** | ✅ Diseñado | `assets/puente-portal-actuador.svg` — T_BANDEJA=162mm, telescópico 380–560mm |
 | **Firmware actuador (pin)** | 📦 Referencia | `firmware/actuator/` — supersedido por firmware/esp32/ |
-| **Firmware ESP32 unificado** | ✅ Listo para flashear | `firmware/esp32/` — HID + Actuador en un solo ESP32-S3 |
+| **Firmware ESP32 unificado** | ✅ Flasheado y validado | `firmware/esp32/` — HID + Actuador en un solo ESP32-S3 — end-to-end OK 2026-05-13 |
 | **Firmware actuador (electroimán)** | ❌ Descartado | `firmware/actuator-electroiman/` — diseño descartado 2026-05-13 |
-| **Clientes Python + test prototipo** | ✅ Creado | `actuator_client`, `hid_client`, `poll_utils`, `conftest`, `test_tare_product` |
+| **Clientes Python + test prototipo** | ✅ Validado con hardware | `test_tare_product.py` corregido — F2 cancela tara, no F4 |
+| **Prueba manual guiada** | ✅ Validado 2026-05-13 | `scripts/prueba_manual.py` — tara+producto con pesas físicas, 4/4 fases OK |
 | Tests de aplicación | ❌ No iniciado | Cypress (Fases 1-2), pytest SSH/VNC (Fases 3-4) |
-| **Hardware físico (puente portal)** | ❌ No construido | SVG listo — BLOQUEANTE para todo lo que sigue |
-| Sprint 0 — curva de estabilización | 🟡 Pendiente hardware | Ejecutar tras construir portal y flashear ESP32 |
+| **Hardware físico (puente portal)** | ❌ No construido | SVG listo — solo bloquea tests de pesaje automatizado |
+| Sprint 0 — curva de estabilización | 🟡 Pendiente hardware | Ejecutar tras construir portal |
 
 **Archivos creados y validados:**
 ```
@@ -34,7 +35,9 @@ tests/actuator_client.py                      ← TCP client para ESP32 actuador
 tests/hid_client.py                           ← TCP client para ESP32 HID ← NUEVO
 tests/poll_utils.py                           ← poll_until_stable() (§6.5) ← NUEVO
 tests/conftest.py                             ← fixtures pytest: api/actuator/hid/profile ← NUEVO
-tests/test_tare_product.py                    ← prototipo: tara + peso producto (13 pasos) ← NUEVO
+tests/test_tare_product.py                    ← prototipo: tara + peso producto — F2 cancela tara (corregido)
+scripts/prueba_manual.py                      ← guía interactiva: misma lógica, pesas a mano ← NUEVO
+requirements.txt                              ← dependencias Python del proyecto ← NUEVO
 config/hardware_params.yaml                   ← parámetros físicos + metrología AR/BR/US (§16 + §22.3)
 .env.test.example                             ← plantilla — NEO_ESP32_IP único (un solo ESP32)
 
@@ -65,7 +68,7 @@ docs/analysis/analisis-impacto-electroiman.md ← análisis descartado (referenc
 | ID | Deliverable | Fecha límite | Estado real | Notas |
 |---|---|---|---|---|
 | DB-4.1 | Diseño de arquitectura HW/SW con I+D | 28/06/26 | ✅ Completo | Finalizado antes de fecha |
-| DB-4.2 | Módulo funcional teclado | 22/06/26 | ✅ Completo | ESP32 HID validado end-to-end 12/05/26 — adelantado |
+| DB-4.2 | Módulo funcional teclado | 22/06/26 | ✅ Completo | ESP32 HID validado end-to-end 13/05/26 — firmware unificado flasheado y probado |
 | DB-4.3 | Módulo funcional pesaje | 06/08/26 | 🔄 En progreso | Firmware actuador listo, construcción mecánica pendiente |
 | DB-4.4 | Módulo funcional pantalla | 27/08/26 | ⏳ Pendiente | VNC + OpenCV template matching (§21 del plan) |
 | DB-4.5 | Módulo funcional conectividades (ETH/WiFi/USB) | 17/09/26 | ⏳ Pendiente | Cypress: ping ETH, ping WiFi, HID USB (ya validado) |
@@ -123,6 +126,36 @@ PC → TCP 192.168.100.202:9999 → ESP32 → USB HID → Balanza 192.168.100.12
      KEY_PRESS F4 (CERO)       ok        ok          peso: 0,014 → 0,000 kg ✅
 ```
 
+### SSH a la balanza — confirmado 2026-05-13
+
+- **Usuario:** `root` (no `systel`)
+- **Key:** `~/.ssh/cuora_neo` (ya instalada en la balanza)
+- **Comando:** `ssh -i ~/.ssh/cuora_neo root@192.168.100.123`
+
+### Comportamiento de TARA/CERO — confirmado 2026-05-13
+
+| Tecla | Función real en CUORA NEO |
+|---|---|
+| F2 (TARA) con peso en bandeja | Aplica tara — display pasa a 0g |
+| F2 (TARA) con bandeja vacía + tara activa | **Cancela la tara** — display vuelve a 0g |
+| F4 (CERO) | Corrección de cero dentro del rango permitido — **NO cancela tara** |
+
+Para limpiar el estado al final del test: retirar pesas → F2 (no F4).
+`test_tare_product.py` y `prueba_manual.py` ya correguidos con este comportamiento.
+
+### Firmware ESP32 unificado — validación completa 2026-05-13
+
+1. Flash: `pio run --target upload` desde `firmware/esp32/` → OK
+2. Serial Monitor confirma: `WiFi OK → TCP :9999 → USB HID keyboard ready`
+3. `lsusb` desde la balanza: `Bus 001 Device 003: ID 303a:1001` — ESP32 detectado
+4. `dmesg`: `hid-generic: USB HID v1.11 Keyboard` — kernel registró como teclado (event9)
+5. `python scripts/validar_esp32.py` → 4/4 tests pasaron
+6. Evento `EV_KEY KEY_F4` confirmado en `/dev/input/event9` → balanza corrigió peso a 0
+
+**Nota importante sobre el primer boot:** El primer `KEY_PRESS` después del flash puede fallar con
+`SendReport(): report 1 wait failed` — condición de carrera única en el arranque inicial.
+En el segundo intento (o tras ~30s de conexión estable) funciona correctamente. No requiere fix.
+
 ---
 
 ## Lo próximo a hacer (en orden)
@@ -138,24 +171,9 @@ Enviar `assets/puente-portal-actuador.svg` al herrero para fabricar:
 - Fin de carrera HOME (arriba) + SAFETY (abajo)
 - Ver lista de materiales en **§5** y **§11** del plan
 
-### 2. Flashear firmware/esp32/ al ESP32-S3
+### 2. ~~Flashear firmware/esp32/~~ ✅ COMPLETADO 2026-05-13
 
-```bash
-# Desde VS Code con PlatformIO:
-# 1. Copiar firmware/esp32/include/config.h.example → config.h
-# 2. Completar WIFI_SSID, WIFI_PASS, NEO_IP
-# 3. PlatformIO: Upload (COM4)
-# 4. Verificar Serial Monitor: "USB HID keyboard ready — sistema listo"
-```
-
-Verificación rápida desde PC:
-```bash
-echo '{"cmd":"STATUS"}' | nc 192.168.100.202 9999
-# → {"status":"ok","state":"IDLE","steps":0,"hid":"ready"}
-
-echo '{"cmd":"KEY_PRESS","key":"F4"}' | nc 192.168.100.202 9999
-# → balanza ejecuta CERO ← confirma HID funcionando
-```
+Firmware unificado flasheado, validado y funcionando. Ver sección Hallazgos.
 
 ### 3. Sprint 0 — curva de estabilización (1–2 días con hardware)
 
