@@ -120,13 +120,20 @@ class BalanzaDB:
             "value_dbl": float(row[3]) if row[3] not in (None, "") else None,
         }
 
-    def saves_invoices(self) -> bool:
-        """True si la balanza está configurada para guardar ventas en invoice.
-        saveinvoice.value_int=1 → guarda; 0 → NO guarda (modo etiqueta sin registro).
-        Nota: el modo ticket/etiqueta NO vive en public.setup — es estado en memoria
-        de la aplicación. Este flag solo refleja la configuración de guardado."""
-        p = self.get_setup_param("saveinvoice")
-        return bool(p and p["value_int"] == 1) if p else False
+    def get_print_mode(self) -> str:
+        """Modo de impresión/venta activo según tipopapel:
+          'ticket'  → modo ticket — crea invoice en public.invoice
+          'label'   → etiqueta — NO crea invoice (confirmado empíricamente)
+          'clabel'  → etiqueta continua — NO crea invoice (confirmado empíricamente)
+          'none'    → sin impresión
+        Nota: saveinvoice.value_int NO afecta la creación de invoices en ningún modo
+        (verificado con saveinvoice=0 y saveinvoice=1 en label/clabel)."""
+        p = self.get_setup_param("tipopapel")
+        return p["value_str"] if p and p["value_str"] else "unknown"
+
+    def is_ticket_mode(self) -> bool:
+        """True si la balanza está en modo ticket (crea invoices en BD)."""
+        return self.get_print_mode() == "ticket"
 
     def active_products(self) -> list[dict]:
         """Lista de productos activos con precio."""
