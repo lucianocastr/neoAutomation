@@ -43,6 +43,21 @@ class NEOApiClient:
     def create_plu(self, data: dict) -> dict:
         return self._post("/api/plu/create", data)
 
+    def delete_plu(self, plu: int, username: str, password: str) -> dict:
+        # BUGS-4528: DELETE /api/plu/delete siempre 500 en este firmware
+        # POST retorna 405 — no hay workaround funcional; este método falla siempre
+        return self._request("DELETE", "/api/plu/delete",
+                             json={"plu": str(plu), "username": username, "password": password})
+
+    def set_price(self, plu: int, price_list: str, price, username: str, password: str) -> dict:
+        return self._post("/api/plu/price", {
+            "plu": str(plu), "priceList": price_list,
+            "price": str(price), "username": username, "password": password,
+        })
+
+    def get_setup(self) -> dict:
+        return self._get("/api/setup")
+
     # ── Evidencia ──────────────────────────────────────────────
 
     def dump_timeline(self) -> List[dict]:

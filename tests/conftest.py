@@ -54,6 +54,14 @@ def hid(load_env) -> HIDClient:
 
 
 @pytest.fixture(scope="session")
+def creds(load_env) -> dict:
+    return {
+        "username": _require("NEO_WEB_USER"),
+        "password": _require("NEO_WEB_PASS"),
+    }
+
+
+@pytest.fixture(scope="session")
 def profile(load_env):
     variant = os.getenv("TEST_METROLOGY_PROFILE", "AR")
     cfg_path = Path(__file__).parent.parent / "config" / "hardware_params.yaml"
